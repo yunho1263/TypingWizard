@@ -575,7 +575,7 @@
             "id": "841a4b7e-a9f8-4448-a960-01a4920cc9d4",
             "actions": [
                 {
-                    "name": "Confirm",
+                    "name": "SpellConfirm",
                     "type": "Button",
                     "id": "c3cd0131-77c1-4967-91bc-37dba14fc697",
                     "expectedControlType": "Button",
@@ -592,7 +592,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Confirm",
+                    "action": "SpellConfirm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

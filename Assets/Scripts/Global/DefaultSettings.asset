@@ -12,6 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2dc4413ecb4b2e48b86e8564c1bf9b6, type: 3}
   m_Name: DefaultSettings
   m_EditorClassIdentifier: 
-  language: 0
+  resolutionWidth: 0
+  resolutionHeight: 0
+  isFullScreen: 0
+  isVSync: 0
   masterVolume: 0
-  volume: 0
+  backgroundMusicVolume: 0
+  effectSoundVolume: 0
+  voiceVolume: 0
+  uiVolume: 0
+  positive: 0
+  negative: 0
+  pauseMenu: 0
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  attack: 0
+  rolling: 0
+  interactions: 0
+  spell: 0
+  inventory: 0
+  spellBook: 0
+  language: 0
+  continuousTyping: 0

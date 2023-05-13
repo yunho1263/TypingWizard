@@ -26,7 +26,35 @@ public class Spell_InputField : MonoBehaviour
 
     public void TypingFinish()
     {
-        Player.instance.CastSpell(Player.instance.spell_BinaryTree.Search(spell).GetComponent<Spell>());
+        //문자열이 없으면 종료
+        if (spell == string.Empty)
+        {
+            Player.instance.playerInput.currentActionMap = Player.instance.playerInput.actions.FindActionMap("Player");
+            inputField.gameObject.SetActive(false);
+            inputField.text = string.Empty;
+            return;
+        }
+
+        Player.instance.spell_BinaryTree.current = Player.instance.spell_BinaryTree.root;
+        GameObject castingSpellObj = Player.instance.spell_BinaryTree.Search(spell);
+        if (castingSpellObj == null)
+        {
+            Debug.Log("주문이 존재하지 않습니다.");
+            
+        }
+        else
+        {
+            Spell castSpell = castingSpellObj.GetComponent<Spell>();
+            if (castSpell.isAcquired)
+            {
+                Player.instance.CastSpell(castingSpellObj.GetComponent<Spell>());
+            }
+            else
+            {
+                Debug.Log("주문이 아직 해금되지 않았습니다");
+            }
+            
+        }
         Player.instance.playerInput.currentActionMap = Player.instance.playerInput.actions.FindActionMap("Player");
         inputField.gameObject.SetActive(false);
         inputField.text = string.Empty;

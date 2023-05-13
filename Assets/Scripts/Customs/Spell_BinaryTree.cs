@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[Serializable]
 public class Spell_BinaryTree
 {
     List<GameObject> allSpellObjs;
@@ -13,10 +14,12 @@ public class Spell_BinaryTree
     public void Initialize()
     {
         //리소스에서 프리팹들을 불러와 노드로 만들어서 트리에 넣는다.
-        GameObject[] allSpellPrefebs = Resources.LoadAll<GameObject>("Assets/Prefabs/Spells");
+        GameObject[] allSpellPrefebs = Resources.LoadAll<GameObject>("Prefabs/Spells");
+        allSpellObjs = new List<GameObject>();
         foreach (GameObject pre in allSpellPrefebs)
         {
-            allSpellObjs.Add(GameObject.Instantiate(pre));
+            GameObject newSpell =  GameObject.Instantiate(pre);
+            allSpellObjs.Add(newSpell);
         }
         Optimize();
     }
@@ -40,6 +43,7 @@ public class Spell_BinaryTree
         root = nodes[0];
         for (int j = 1; j < nodes.Length; j++)
         {
+            current = root;
             Add(nodes[j]);
         }
     }
@@ -87,7 +91,7 @@ public class Spell_BinaryTree
             else // 왼쪽 자식이 있다면
             {
                 current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
-                Search(spellName); // 재귀 호출
+                return Search(spellName); // 재귀 호출
             }
         }
         else if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(Player.instance.language)) > 0)
@@ -99,14 +103,13 @@ public class Spell_BinaryTree
             else // 오른쪽 자식이 있다면
             {
                 current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
-                Search(spellName); // 재귀 호출
+                return Search(spellName); // 재귀 호출
             }
         }
-        else
+        else // 찾았다면
         {
-            return current.spellObj;
+            return current.spellObj; // 찾은 노드를 반환한다.
         }
-        return null;
     }
 }
 
@@ -116,8 +119,8 @@ public class SpellNode
     public SpellNode left;
     public SpellNode right;
     public SpellNode parent;
-    public SpellNode(GameObject spellPrefeb)
+    public SpellNode(GameObject spellObj)
     {
-        this.spellObj = spellPrefeb;
+        this.spellObj = spellObj;
     }
 }

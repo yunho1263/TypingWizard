@@ -15,8 +15,8 @@ MonoBehaviour:
   spellName:
     keys: 0000000001000000
     values:
-    - fireBall3
-    - "\uD654\uC5FC\uAD6C3"
+    - Lightning
+    - "\uBC88\uAC1C"
   spellTags: 00000000
   cost: 10
   values:

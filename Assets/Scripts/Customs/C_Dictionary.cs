@@ -24,14 +24,6 @@ public class C_Dictionary<TKey, TValue>
 
     public TValue Search(TKey key)
     {
-        for (int i = 0; i < keys.Count; i++) // 모든 키를 찾아본다
-        {
-            if (keys[i].Equals(key)) // 키를 찾았다면
-            {
-                return values[i];
-            }
-        }
-        // 키를 찾을 수 없었다면
-        return default(TValue);
+        return values[keys.IndexOf(key)];
     }
 }

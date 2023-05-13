@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public Vector2 moveNormal;
 
+    [SerializeField]
     public Spell_BinaryTree spell_BinaryTree;
     public TMP_InputField spellInputField;
 

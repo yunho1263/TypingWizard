@@ -15,8 +15,8 @@ MonoBehaviour:
   spellName:
     keys: 0000000001000000
     values:
-    - fireBall4
-    - "\uD654\uC5FC\uAD6C4"
+    - Vortex
+    - "\uC18C\uC6A9\uB3CC"
   spellTags: 00000000
   cost: 10
   values:

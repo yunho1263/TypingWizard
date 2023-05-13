@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-public enum Language
-{
-    English,
-    Korean
-}
-
 public enum Spell_Tag
 {
     AttackSpell,

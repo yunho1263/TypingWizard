@@ -17,13 +17,15 @@ public class Player : MonoBehaviour
         {
             instance = this;
         }
+        else if(instance != this)
+        {
+            Destroy(this.gameObject);
+        }
 
 
         spell_BinaryTree = new Spell_BinaryTree();
         spell_BinaryTree.Initialize();
     }
-
-    public Language language;
 
     public PlayerInput playerInput;
 

@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: TitleScene/Canvas/SettingPanel/Panel/Panel/Toggle/Label
     m_Metadata:
       m_Items: []
+  - m_Id: 304426405130240
+    m_Key: TitleScene/Canvas/SettingPanel/Panel/Text (TMP) 1
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

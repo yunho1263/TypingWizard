@@ -99,9 +99,6 @@ public class DefaultSettings : ScriptableObject
 
     [Header("게임 설정")]
     [SerializeField]
-    private Language language;
-    public Language Language { get { return language; } }
-    [SerializeField]
     private bool continuousTyping;
     public bool ContinuousTyping { get { return continuousTyping; } }
 }

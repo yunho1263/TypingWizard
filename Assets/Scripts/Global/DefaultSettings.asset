@@ -34,5 +34,4 @@ MonoBehaviour:
   spell: 13
   inventory: 105
   spellBook: 98
-  language: 0
   continuousTyping: 1

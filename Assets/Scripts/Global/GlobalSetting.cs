@@ -6,13 +6,7 @@ using System.IO;
 using System.Text;
 using Unity.VisualScripting;
 using System;
-
-public enum Language
-{
-    English,
-    Korean,
-    Japanese
-}
+using UnityEngine.Localization.Settings;
 
 [Serializable]
 public class GraphicsSettings
@@ -20,16 +14,22 @@ public class GraphicsSettings
     public int resolutionWidth;
     public int resolutionHeight;
     public bool isFullScreen;
+    [Space(10)]
     public bool isVSync;
 }
 
 [Serializable]
 public class SoundSettings
 {
+    [Range(0, 100)]
     public float masterVolume;
+    [Range(0, 100)]
     public float backgroundMusicVolume;
+    [Range(0, 100)]
     public float effectSoundVolume;
+    [Range(0, 100)]
     public float voiceVolume;
+    [Range(0, 100)]
     public float uiVolume;
 }
 
@@ -38,17 +38,22 @@ public class InputSettings
 {
     public KeyCode positive;
     public KeyCode negative;
+    [Space(10)]
+
     public KeyCode pauseMenu;
+    [Space(10)]
 
     public KeyCode up;
     public KeyCode down;
     public KeyCode left;
     public KeyCode right;
+    [Space(10)]
 
     public KeyCode attack;
     public KeyCode rolling;
     public KeyCode interactions;
     public KeyCode spell;
+    [Space(10)]
 
     public KeyCode inventory;
     public KeyCode spellBook;
@@ -57,7 +62,6 @@ public class InputSettings
 [Serializable]
 public class GameSettings
 {
-    public Language language;
     public bool continuousTyping;
 }
 
@@ -100,12 +104,10 @@ public class GlobalSetting : MonoBehaviour
         inputSettings = new InputSettings();
         gameSettings = new GameSettings();
 
-        if (ReadJson())
+        if (!ReadJson())
         {
-            return;
+            ResetAllSettings();
         }
-
-        ResetAllSettings();
     }
 
     public void SaveJson()
@@ -210,32 +212,11 @@ public class GlobalSetting : MonoBehaviour
         inputSettings.inventory = defaultSettings.Inventory;
         inputSettings.spellBook = defaultSettings.SpellBook;
 
-        gameSettings.language = defaultSettings.Language;
         gameSettings.continuousTyping = defaultSettings.ContinuousTyping;
     }
 
-    public void ApplyAllSettings(GraphicsSettings graphicsSettings)
+    public void ApplySettings()
     {
-        Screen.SetResolution(graphicsSettings.resolutionWidth, graphicsSettings.resolutionHeight, graphicsSettings.isFullScreen);
-        QualitySettings.vSyncCount = graphicsSettings.isVSync ? 1 : 0;
-        if (graphicsSettings.isFullScreen)
-        {
-            // 전체화면으로 전환
-        }
-        else
-        {
-            // 윈도우화면으로 전환
-        }
-    }
-
-    public void ApplyAllSettings(SoundSettings soundSettings)
-    {
-        AudioListener.volume = soundSettings.masterVolume;
-        // 나중에 사운드 매니저 만들어서 적용
-    }
-
-    public void ApplyAllSettings(InputSettings inputSettings)
-    {
-        // 인풋시스템으로 바인딩 변경
+        
     }
 }

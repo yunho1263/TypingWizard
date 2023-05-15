@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Core.Parsing;
 
 public class SettingUi : MonoBehaviour
 {
-
     public Button apply;
     public Button cancel;
 
@@ -14,12 +15,11 @@ public class SettingUi : MonoBehaviour
 
     private void Awake()
     {
-        GlobalSetting.Instance.Initialize();
+
     }
 
     public void Apply()
     {
-        GlobalSetting.Instance.gameSettings.language = (Language)language.value;
         GlobalSetting.Instance.SaveJson();
         gameObject.SetActive(false);
     }
@@ -32,5 +32,13 @@ public class SettingUi : MonoBehaviour
     public void ResetSettings()
     {
         GlobalSetting.Instance.ResetAllSettings();
+    }
+
+    //-------------------------------------------------------------------------
+
+    public void SetScreenResolution()
+    {
+        //GlobalSetting.Instance.graphicsSettings.resolutionWidth =
+        //GlobalSetting.Instance.graphicsSettings.resolutionHeight = 
     }
 }

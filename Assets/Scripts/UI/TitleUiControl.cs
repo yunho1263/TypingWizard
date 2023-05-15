@@ -16,7 +16,7 @@ public class TitleUiControl : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.LoadScene("main");
+        SceneManager.LoadScene("tset");
     }
 
     public void LoadGame()

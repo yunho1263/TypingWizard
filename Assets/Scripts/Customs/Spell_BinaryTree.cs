@@ -37,7 +37,13 @@ public class Spell_BinaryTree
         //배열을 정렬한다.
         Array.Sort(nodes, delegate (SpellNode x, SpellNode y)
         {
-            return x.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language).CompareTo(y.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language));
+            Spell xSpell;
+            x.spellObj.TryGetComponent(out xSpell);
+
+            Spell ySpell;
+            y.spellObj.TryGetComponent(out ySpell);
+
+            return xSpell.spellName.CompareTo(ySpell.spellName);
         });
         //배열을 다시 트리로 만든다.
         root = nodes[0];
@@ -50,39 +56,53 @@ public class Spell_BinaryTree
 
     public void Add(SpellNode newNode)
     {
-        // 루트 노드부터 시작해서 새 노드를 추가할 위치를 찾는다.
-        if (newNode.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language).CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language)) < 0)
+        Spell currSpell;
+        current.spellObj.TryGetComponent(out currSpell);
+
+        Spell newSpell;
+        newNode.spellObj.TryGetComponent(out newSpell);
+
+        while (true)
         {
-            if (current.left == null) // 왼쪽 자식이 없다면
-            {
-                current.left = newNode; // 왼쪽 자식으로 넣는다.
-                newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
-            }
-            else // 왼쪽 자식이 있다면
-            {
-                current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
-                Add(newNode); // 재귀 호출
-            }
+            
         }
-        else
-        {
-            if (current.right == null) // 오른쪽 자식이 없다면
-            {
-                current.right = newNode; // 오른쪽 자식으로 넣는다.
-                newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
-            }
-            else // 오른쪽 자식이 있다면
-            {
-                current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
-                Add(newNode); // 재귀 호출
-            }
-        }
+
+        //// 루트 노드부터 시작해서 새 노드를 추가할 위치를 찾는다.
+        //if (newSpell.spellName.CompareTo(currSpell.spellName) < 0)
+        //{
+        //    if (current.left == null) // 왼쪽 자식이 없다면
+        //    {
+        //        current.left = newNode; // 왼쪽 자식으로 넣는다.
+        //        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
+        //    }
+        //    else // 왼쪽 자식이 있다면
+        //    {
+        //        current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
+        //        Add(newNode); // 재귀 호출
+        //    }
+        //}
+        //else
+        //{
+        //    if (current.right == null) // 오른쪽 자식이 없다면
+        //    {
+        //        current.right = newNode; // 오른쪽 자식으로 넣는다.
+        //        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
+        //    }
+        //    else // 오른쪽 자식이 있다면
+        //    {
+        //        current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
+        //        Add(newNode); // 재귀 호출
+        //    }
+        //}
     }
 
     public GameObject Search(string spellName)
     {
+        Spell currSpell;
+        current.spellObj.TryGetComponent(out currSpell);
+
         // 루트 노드부터 시작해서 찾는 노드를 찾는다.
-        if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language)) < 0)
+        if (spellName.CompareTo(currSpell.spellName) < 0)
         {
             if (current.left == null) // 왼쪽 자식이 없다면
             {
@@ -94,7 +114,7 @@ public class Spell_BinaryTree
                 return Search(spellName); // 재귀 호출
             }
         }
-        else if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language)) > 0)
+        else if (spellName.CompareTo(currSpell.spellName) > 0)
         {
             if (current.right == null) // 오른쪽 자식이 없다면
             {

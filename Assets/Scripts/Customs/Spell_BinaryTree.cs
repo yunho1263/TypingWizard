@@ -37,7 +37,7 @@ public class Spell_BinaryTree
         //배열을 정렬한다.
         Array.Sort(nodes, delegate (SpellNode x, SpellNode y)
         {
-            return x.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language).CompareTo(y.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language));
+            return x.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language).CompareTo(y.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language));
         });
         //배열을 다시 트리로 만든다.
         root = nodes[0];
@@ -51,7 +51,7 @@ public class Spell_BinaryTree
     public void Add(SpellNode newNode)
     {
         // 루트 노드부터 시작해서 새 노드를 추가할 위치를 찾는다.
-        if (newNode.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language).CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language)) < 0)
+        if (newNode.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language).CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language)) < 0)
         {
             if (current.left == null) // 왼쪽 자식이 없다면
             {
@@ -82,7 +82,7 @@ public class Spell_BinaryTree
     public GameObject Search(string spellName)
     {
         // 루트 노드부터 시작해서 찾는 노드를 찾는다.
-        if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language)) < 0)
+        if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language)) < 0)
         {
             if (current.left == null) // 왼쪽 자식이 없다면
             {
@@ -94,7 +94,7 @@ public class Spell_BinaryTree
                 return Search(spellName); // 재귀 호출
             }
         }
-        else if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language)) > 0)
+        else if (spellName.CompareTo(current.spellObj.GetComponent<Spell>().spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language)) > 0)
         {
             if (current.right == null) // 오른쪽 자식이 없다면
             {

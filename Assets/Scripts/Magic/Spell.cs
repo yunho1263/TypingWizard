@@ -9,6 +9,6 @@ public class Spell : MonoBehaviour
     public bool isAcquired;
     public void Cast(GameObject caster)
     {
-        Debug.Log(spellData.SpellName.Search(GlobalSetting.instance.gameSettings.language) +" "+ caster.gameObject.name);
+        Debug.Log(spellData.SpellName.Search(GlobalSetting.Instance.gameSettings.language) +" "+ caster.gameObject.name);
     }
 }

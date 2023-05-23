@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4216156834736956935
 MonoBehaviour:
@@ -44,11 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79df4d3e71afc094c8e88c28a7ed09c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellID: 0
+  spellName: "\uBE14\uB9AC\uC790\uB4DC"
   isAcquired: 1
-  spellName: "\u3142\u3148\u3137\u3131"
+  arias:
+  - "\uBE14\uB9AC\uC790\uB4DC"
   spellTags: 
+  araiaType: 0
   cost: 0
-  values:
-    keys: 
-    values: []
   description: 
+  caster: {fileID: 0}
+  targets: []

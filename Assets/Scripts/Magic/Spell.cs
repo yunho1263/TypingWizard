@@ -17,28 +17,30 @@ public class Spell : MonoBehaviour
         Charging, //충전형
     }
 
-    public enum Value_Type
+    public enum Araia_Type //영창 타입
     {
-        Damage, //데미지
-        Heal, //회복량
-        Effect, //효과
-        Duration, //지속시간
-        Range, //범위
-        Speed, //속도
+        SpellName,
+        OneSentence,
+        MultipleSentence
     }
 
-    public bool isAcquired;
+    public int spellID; //주문 ID
+    public string spellName; //주문 이름
 
-    public string spellName;
+    public bool isAcquired; //획득 여부
+    public List<string> arias; //주문 영창
 
     [SerializeField]
     public List<Spell_Tag> spellTags; //주문 태그
+    public Araia_Type araiaType;
 
     public int cost; //주문 비용
 
-    public C_Dictionary<Value_Type, float> values; //주문 값
-
     public string description; // 주문 설명
+
+    public GameObject caster; // 시전자
+    public List<GameObject> targets; // 대상
+
     public void Cast(GameObject caster)
     {
         Debug.Log(spellName + " "+ caster.gameObject.name);

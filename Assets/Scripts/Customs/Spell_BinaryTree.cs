@@ -6,10 +6,11 @@ using System;
 [Serializable]
 public class Spell_BinaryTree
 {
+    [SerializeField]
     List<GameObject> allSpellObjs;
 
+    [SerializeField]
     public SpellNode root;
-    public SpellNode current;
 
     public void Initialize()
     {
@@ -21,6 +22,10 @@ public class Spell_BinaryTree
             GameObject newSpell =  GameObject.Instantiate(pre);
             allSpellObjs.Add(newSpell);
         }
+        // 사용하지 않는 리소스 제거
+
+        Resources.UnloadUnusedAssets();
+        //트리 최적화
         Optimize();
     }
 
@@ -43,96 +48,101 @@ public class Spell_BinaryTree
             Spell ySpell;
             y.spellObj.TryGetComponent(out ySpell);
 
-            return xSpell.spellName.CompareTo(ySpell.spellName);
+            return xSpell.arias[0].CompareTo(ySpell.arias[0]);
         });
         //배열을 다시 트리로 만든다.
         root = nodes[0];
         for (int j = 1; j < nodes.Length; j++)
         {
-            current = root;
             Add(nodes[j]);
         }
     }
 
     public void Add(SpellNode newNode)
     {
-        Spell currSpell;
-        current.spellObj.TryGetComponent(out currSpell);
+        SpellNode current = root;
 
         Spell newSpell;
         newNode.spellObj.TryGetComponent(out newSpell);
 
         while (true)
         {
-            
-        }
+            Spell currSpell;
+            current.spellObj.TryGetComponent(out currSpell);
 
-        //// 루트 노드부터 시작해서 새 노드를 추가할 위치를 찾는다.
-        //if (newSpell.spellName.CompareTo(currSpell.spellName) < 0)
-        //{
-        //    if (current.left == null) // 왼쪽 자식이 없다면
-        //    {
-        //        current.left = newNode; // 왼쪽 자식으로 넣는다.
-        //        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
-        //    }
-        //    else // 왼쪽 자식이 있다면
-        //    {
-        //        current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
-        //        Add(newNode); // 재귀 호출
-        //    }
-        //}
-        //else
-        //{
-        //    if (current.right == null) // 오른쪽 자식이 없다면
-        //    {
-        //        current.right = newNode; // 오른쪽 자식으로 넣는다.
-        //        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
-        //    }
-        //    else // 오른쪽 자식이 있다면
-        //    {
-        //        current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
-        //        Add(newNode); // 재귀 호출
-        //    }
-        //}
+            if (newSpell.arias[0].CompareTo(currSpell.arias[0]) < 0)
+            {
+                if (current.left == null) // 왼쪽 자식이 없다면
+                {
+                    current.left = newNode; // 왼쪽 자식으로 넣는다.
+                    newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
+                    break;
+                }
+                else // 왼쪽 자식이 있다면
+                {
+                    current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
+                    continue;
+                }
+            }
+            else
+            {
+                if (current.right == null) // 오른쪽 자식이 없다면
+                {
+                    current.right = newNode; // 오른쪽 자식으로 넣는다.
+                    newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
+                    break;
+                }
+                else // 오른쪽 자식이 있다면
+                {
+                    current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
+                    continue;
+                }
+            }
+        }
     }
 
-    public GameObject Search(string spellName)
+    public GameObject Search(string aria)
     {
+        SpellNode current = root;
         Spell currSpell;
-        current.spellObj.TryGetComponent(out currSpell);
 
-        // 루트 노드부터 시작해서 찾는 노드를 찾는다.
-        if (spellName.CompareTo(currSpell.spellName) < 0)
+        while (true)
         {
-            if (current.left == null) // 왼쪽 자식이 없다면
+            current.spellObj.TryGetComponent(out currSpell);
+
+            if (aria.CompareTo(currSpell.arias[0]) < 0)
             {
-                return null;
+                if (current.left == null) // 왼쪽 자식이 없다면
+                {
+                    return null;
+                }
+                else // 왼쪽 자식이 있다면
+                {
+                    current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
+                    continue;
+                }
             }
-            else // 왼쪽 자식이 있다면
+            else if (aria.CompareTo(currSpell.arias[0]) > 0)
             {
-                current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
-                return Search(spellName); // 재귀 호출
+                if (current.right == null) // 오른쪽 자식이 없다면
+                {
+                    return null;
+                }
+                else // 오른쪽 자식이 있다면
+                {
+                    current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
+                    continue;
+                }
             }
-        }
-        else if (spellName.CompareTo(currSpell.spellName) > 0)
-        {
-            if (current.right == null) // 오른쪽 자식이 없다면
+            else // 찾았다면
             {
-                return null;
+                return current.spellObj; // 찾은 노드를 반환한다.
             }
-            else // 오른쪽 자식이 있다면
-            {
-                current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
-                return Search(spellName); // 재귀 호출
-            }
-        }
-        else // 찾았다면
-        {
-            return current.spellObj; // 찾은 노드를 반환한다.
         }
     }
 }
 
+[Serializable]
 public class SpellNode
 {
     public GameObject spellObj;

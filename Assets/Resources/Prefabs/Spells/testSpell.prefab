@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8824070141692935352}
-  - component: {fileID: 4216156834736956935}
+  - component: {fileID: -3273391214848281320}
   m_Layer: 0
   m_Name: testSpell
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4216156834736956935
+--- !u!114 &-3273391214848281320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3626605949840699949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79df4d3e71afc094c8e88c28a7ed09c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 129a6d5d46ef23b43b1c80b8ee083af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellID: 0
+  spellID: 1
   spellName: "\uD30C\uC774\uC5B4\uBCFC"
   isAcquired: 1
   arias:
@@ -55,3 +55,24 @@ MonoBehaviour:
   description: 
   caster: {fileID: 0}
   targets: []
+  values:
+  - key: 0
+    value: 5
+  - key: 0
+    value: 0
+  maxProjectileCount: 2
+  projectiles: []
+  projectilePrefab: {fileID: 4429862581699613265, guid: f466cd4038400cf42bd0f89489e5fc79, type: 3}
+  damage:
+    damageType: 0
+    damageCategori: 0
+    damageElement: 0
+    damageName: 
+    Description: 
+    owner: {fileID: 0}
+    target: {fileID: 0}
+    damageValue: 0
+    OnApplyDamage:
+      m_PersistentCalls:
+        m_Calls: []
+  d_ScrObj: {fileID: 11400000, guid: c5df3748993adb0459743ead6624b8f3, type: 2}

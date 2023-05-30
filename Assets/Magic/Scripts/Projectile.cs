@@ -36,10 +36,9 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Character>().TakeDamage(damage);
+            Debug.Log("Hit Enemy");
         }
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        //Instantiate(impactEffect, transform.position, transform.rotation);
     }
 
     public void Shoot(Spell spell, Damage damage, float lifeTime, float speed, Vector3 nDir)

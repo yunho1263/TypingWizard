@@ -23,7 +23,7 @@ public class Character : MonoBehaviour
     public float currentMp; // 현재 마나
 
     public float moveSpeed; // 이동 속도
-    public Vector2 moveDirNomormal; // 이동 방향
+    public Vector3 moveDirNomormal; // 이동 방향
 
     protected void Start()
     {
@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
         currentHp = maxHp; // 현재 체력을 최대 체력으로 초기화
         currentMp = maxMp; // 현재 마나를 최대 마나로 초기화
 
-        moveDirNomormal = Vector2.zero; // 이동 방향을 0으로 초기화
+        moveDirNomormal = Vector3.zero; // 이동 방향을 0으로 초기화
     }
 
 

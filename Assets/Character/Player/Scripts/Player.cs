@@ -37,12 +37,13 @@ public class Player : Character
 
     public void OnMove(InputValue value)
     {
+        moveDirNomormal = Vector3.zero;
         if (value.Get() == null)
         {
-            moveDirNomormal = Vector2.zero;
             return;
         }
-        moveDirNomormal = value.Get<Vector2>();
+        moveDirNomormal.x = value.Get<Vector2>().x;
+        moveDirNomormal.z = value.Get<Vector2>().y;
     }
 
     public void OnInputModeChanges() // 주문 입력 필드 활성화

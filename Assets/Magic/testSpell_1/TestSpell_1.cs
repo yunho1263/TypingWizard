@@ -37,7 +37,7 @@ public class TestSpell_1 : Spell
             {
                 projectiles[i].gameObject.SetActive(true);
                 ValueDictionaryEntry Entry = values.FirstOrDefault(item => item.key.Equals(ValueType.Damage));
-                projectiles[i].Shoot(this, damage, 5f, 10f, caster.transform.up);
+                projectiles[i].Shoot(this, damage, 5f, 10f, Vector3.forward);
                 break;
             }
         }

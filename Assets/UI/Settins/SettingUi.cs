@@ -6,39 +6,43 @@ using TMPro;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Core.Parsing;
 
-public class SettingUi : MonoBehaviour
+namespace TypingWizard.UI
 {
-    public Button apply;
-    public Button cancel;
-
-    public TMP_Dropdown language;
-
-    private void Awake()
+    public class SettingUi : MonoBehaviour
     {
+        public Button apply;
+        public Button cancel;
 
+        public TMP_Dropdown language;
+
+        private void Awake()
+        {
+
+        }
+
+        public void Apply()
+        {
+            GlobalSetting.Instance.SaveJson();
+            gameObject.SetActive(false);
+        }
+
+        public void Cancel()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void ResetSettings()
+        {
+            GlobalSetting.Instance.ResetAllSettings();
+        }
+
+        //-------------------------------------------------------------------------
+
+        public void SetScreenResolution()
+        {
+            //GlobalSetting.Instance.graphicsSettings.resolutionWidth =
+            //GlobalSetting.Instance.graphicsSettings.resolutionHeight = 
+        }
     }
 
-    public void Apply()
-    {
-        GlobalSetting.Instance.SaveJson();
-        gameObject.SetActive(false);
-    }
-
-    public void Cancel()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void ResetSettings()
-    {
-        GlobalSetting.Instance.ResetAllSettings();
-    }
-
-    //-------------------------------------------------------------------------
-
-    public void SetScreenResolution()
-    {
-        //GlobalSetting.Instance.graphicsSettings.resolutionWidth =
-        //GlobalSetting.Instance.graphicsSettings.resolutionHeight = 
-    }
 }

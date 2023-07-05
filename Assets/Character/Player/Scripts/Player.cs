@@ -7,60 +7,64 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class Player : Character
+namespace TypingWizard
 {
-    //싱글톤 패턴 적용
-    public static Player instance;
-    private void Awake()
+    public class Player : Character
     {
-        if (instance == null)
+        //싱글톤 패턴 적용
+        public static Player instance;
+        private void Awake()
         {
-            instance = this;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                Destroy(this.gameObject);
+            }
+
+            DontDestroyOnLoad(this.gameObject);
+
+            spell_BinaryTree = new Spell_BinaryTree();
+            spell_BinaryTree.Initialize();
         }
-        else if(instance != this)
+
+        public PlayerInput playerInput;
+
+        [SerializeField]
+        public Spell_BinaryTree spell_BinaryTree;
+
+        public TMP_InputField spellInputField;
+
+        public void OnMove(InputValue value)
         {
-            Destroy(this.gameObject);
+            moveDirNomormal = Vector3.zero;
+            if (value.Get() == null)
+            {
+                return;
+            }
+            moveDirNomormal.x = value.Get<Vector2>().x;
+            moveDirNomormal.z = value.Get<Vector2>().y;
         }
 
-        DontDestroyOnLoad(this.gameObject);
-
-        spell_BinaryTree = new Spell_BinaryTree();
-        spell_BinaryTree.Initialize();
-    }
-
-    public PlayerInput playerInput;
-
-    [SerializeField]
-    public Spell_BinaryTree spell_BinaryTree;
-
-    public TMP_InputField spellInputField;
-
-    public void OnMove(InputValue value)
-    {
-        moveDirNomormal = Vector3.zero;
-        if (value.Get() == null)
+        public void OnInputModeChanges() // 주문 입력 필드 활성화
         {
-            return;
+            playerInput.SwitchCurrentActionMap("MagicSpell");
+            spellInputField.gameObject.SetActive(true);
+            spellInputField.Select();
+            Input.imeCompositionMode = IMECompositionMode.On;
         }
-        moveDirNomormal.x = value.Get<Vector2>().x;
-        moveDirNomormal.z = value.Get<Vector2>().y;
+
+        public void CastSpell(Spell spell)
+        {
+            spell.Cast(this);
+        }
+
+        private void Update()
+        {
+            Move();
+        }
     }
 
-    public void OnInputModeChanges() // 주문 입력 필드 활성화
-    {
-        playerInput.SwitchCurrentActionMap("MagicSpell");
-        spellInputField.gameObject.SetActive(true);
-        spellInputField.Select();
-        Input.imeCompositionMode = IMECompositionMode.On;
-    }
-
-    public void CastSpell(Spell spell)
-    {
-        spell.Cast(this);
-    }
-
-    private void Update()
-    {
-        Move();
-    }
 }

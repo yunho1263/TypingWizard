@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Initializer : MonoBehaviour
+namespace TypingWizard
 {
-    private void Start()
+    public class Initializer : MonoBehaviour
     {
-        GlobalSetting.Instance.Initialize();
+        private void Start()
+        {
+            GlobalSetting.Instance.Initialize();
+        }
     }
+
 }

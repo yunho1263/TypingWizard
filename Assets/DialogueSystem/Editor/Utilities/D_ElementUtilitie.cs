@@ -7,11 +7,12 @@ namespace DialogueSystem.Utilities
     using Elements;
     public static class D_ElementUtilitie
     {
-        public static TextField CreateTextField(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextField(string value = null, string lable = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
         {
             TextField textField = new TextField()
             {
-                value = value
+                value = value,
+                label = lable
             };
 
             if (onValueChanged != null)
@@ -22,9 +23,9 @@ namespace DialogueSystem.Utilities
             return textField;
         }
 
-        public static TextField CreateTextArea(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextArea(string value = null, string lable = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
         {
-            TextField textArea = CreateTextField(value, onValueChanged);
+            TextField textArea = CreateTextField(value, lable, onValueChanged);
             textArea.multiline = true;
             return textArea;
         }

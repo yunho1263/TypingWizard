@@ -1,5 +1,4 @@
 using System;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,10 +6,11 @@ using System.Collections.Generic;
 
 namespace DialogueSystem.Windows
 {
-    using Codice.CM.Common;
+    using Enums;
     using Data.Error;
     using Elements;
     using Utilities;
+    using Data.Save;
 
     public class D_GraphView : GraphView
     {
@@ -19,6 +19,29 @@ namespace DialogueSystem.Windows
 
         private SerializableDictionary<string, D_NodeErrorData> ungroupedNodes;
         private SerializableDictionary<Group, SerializableDictionary<string, D_NodeErrorData>> groupedNodes;
+        private SerializableDictionary<string, D_GroupErrorData> groups;
+
+        private int repeatedNamesAmount = 0;
+        public int RepeatedNamesAmount
+        {
+            get 
+            {
+                return repeatedNamesAmount;
+            }
+            set
+            {
+                repeatedNamesAmount = value;
+                if (repeatedNamesAmount == 0)
+                {
+                    editorWindow.EnableSaveButton();
+                }
+
+                if (repeatedNamesAmount >= 1)
+                {
+                    editorWindow.DisableSaveButton();
+                }
+            }
+        }
 
         public D_GraphView(DialogueEditorWindow editorWindow)
         {
@@ -26,6 +49,7 @@ namespace DialogueSystem.Windows
 
             ungroupedNodes = new SerializableDictionary<string, D_NodeErrorData>();
             groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, D_NodeErrorData>>();
+            groups = new SerializableDictionary<string, D_GroupErrorData>();
 
             AddManipulators();
             AddSearchWindow();
@@ -34,11 +58,13 @@ namespace DialogueSystem.Windows
             OnElementsDeleted();
             OnGroupElementsAdded();
             OnGroupElementsRemoved();
+            OnGroupRenamed();
+            OnGraphViewChanged();
 
             AddStyles();
         }
 
-        #region Override Methods
+        #region Override Methods / 오버라이드 메소드
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
@@ -68,7 +94,7 @@ namespace DialogueSystem.Windows
 
         #endregion
 
-        #region Manipulators
+        #region Manipulators / 조작기
         private void AddManipulators()
         {
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
@@ -102,7 +128,7 @@ namespace DialogueSystem.Windows
 
         #endregion
 
-        #region Create
+        #region Create / 생성
         public Dialogue_Node CreateNode(DialogueNodeType newNodeType, Vector2 position)
         {
             Type nodeType = Type.GetType($"DialogueSystem.Elements.Dialogue_{newNodeType}_Node");
@@ -116,20 +142,29 @@ namespace DialogueSystem.Windows
             return node;
         }
 
-        public Group CreateGroup(string title, Vector2 localMousePosition)
+        public Dialogue_Group CreateGroup(string title, Vector2 localMousePosition)
         {
-            Group group = new Group()
-            {
-                title = title
-            };
+            Dialogue_Group group = new Dialogue_Group(title, localMousePosition);
 
-            group.SetPosition(new Rect(localMousePosition, Vector2.zero));
+            AddGroup(group);
+            AddElement(group);
+
+            foreach (GraphElement selectedElement in selection)
+            {
+                if (!(selectedElement is Dialogue_Node))
+                {
+                    continue;
+                }
+
+                Dialogue_Node node = selectedElement as Dialogue_Node;
+                group.AddElement(node);
+            }
 
             return group;
         }
         #endregion
 
-        #region Add
+        #region Add / 추가
         private void AddGridBackground()
         {
             var grid = new GridBackground();
@@ -161,22 +196,64 @@ namespace DialogueSystem.Windows
         }
         #endregion
 
-        #region Callbacks
+        #region Callbacks / 콜백
         private void OnElementsDeleted()
         {
             deleteSelection = (operationName, askUser) =>
             {
+                Type groupType = typeof(Dialogue_Group);
+                Type edgeType = typeof(Edge);
+
+                List<Dialogue_Group> groupsToDelete = new List<Dialogue_Group>();
                 List<Dialogue_Node> nodesToDelete = new List<Dialogue_Node>();
+                List<Edge> edgesToDelete = new List<Edge>();
 
                 foreach (GraphElement element in selection)
                 {
                     if (element is Dialogue_Node node)
                     {
                         nodesToDelete.Add(node);
-
                         continue;
                     }
+
+                    if (element.GetType() == edgeType)
+                    {
+                        Edge edge = element as Edge;
+                        edgesToDelete.Add(edge);
+                        continue;
+                    }
+
+                    if (element.GetType() != groupType)
+                    {
+                        continue;
+                    }
+
+                    Dialogue_Group group = element as Dialogue_Group;
+                    groupsToDelete.Add(group);
                 }
+
+                foreach (Dialogue_Group group in groupsToDelete)
+                {
+                    List<Dialogue_Node> groupNodes = new List<Dialogue_Node>();
+
+                    foreach (GraphElement groupElement in group.containedElements)
+                    {
+                        if (!(groupElement is Dialogue_Node))
+                        {
+                            continue;
+                        }
+
+                        Dialogue_Node groupNode = groupElement as Dialogue_Node;
+                        groupNodes.Add(groupNode);
+                    }
+
+                    group.RemoveElements(groupNodes);
+
+                    RemoveGroup(group);
+                    RemoveElement(group);
+                }
+
+                DeleteElements(edgesToDelete);
 
                 foreach (Dialogue_Node node in nodesToDelete)
                 {
@@ -186,7 +263,7 @@ namespace DialogueSystem.Windows
                     }
 
                     RemoveUngroupedNode(node);
-
+                    node.DisconnectAllPorts();
                     RemoveElement(node);
                 }
             };
@@ -203,10 +280,11 @@ namespace DialogueSystem.Windows
                         continue;
                     }
 
+                    Dialogue_Group nodeGroup = group as Dialogue_Group;
                     Dialogue_Node node = element as Dialogue_Node;
 
                     RemoveUngroupedNode(node);
-                    AddGroupedNode(node, group);
+                    AddGroupedNode(node, nodeGroup);
                 }
             };
         }
@@ -229,12 +307,67 @@ namespace DialogueSystem.Windows
                 }
             };
         }
+
+        private void OnGroupRenamed()
+        {
+            groupTitleChanged = (group, newTitle) =>
+            {
+                Dialogue_Group dialogueGroup = group as Dialogue_Group;
+
+                dialogueGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                RemoveGroup(dialogueGroup);
+
+                dialogueGroup.OldTitle = dialogueGroup.title;
+
+                AddGroup(dialogueGroup);
+            };
+        }
+
+        private void OnGraphViewChanged()
+        {
+            graphViewChanged = (changes) =>
+            {
+                if (changes.edgesToCreate != null)
+                {
+                    foreach (Edge edge in changes.edgesToCreate)
+                    {
+                        Dialogue_Node nextNode = edge.input.node as Dialogue_Node;
+
+                        D_BranchSaveData branchData = edge.output.userData as D_BranchSaveData;
+
+                        branchData.NodeId = nextNode.ID;
+                    }
+                }
+
+                if (changes.elementsToRemove != null)
+                {
+                    Type edgeType = typeof(Edge);
+
+                    foreach (GraphElement element in changes.elementsToRemove)
+                    {
+                        if (element.GetType() != edgeType)
+                        {
+                            continue;
+                        }
+
+                        Edge edge = element as Edge;
+
+                        D_BranchSaveData branchData = edge.output.userData as D_BranchSaveData;
+
+                        branchData.NodeId = "";
+                    }
+                }
+
+                return changes;
+            };
+        }
         #endregion
 
-        #region RepeatedElements
+        #region RepeatedElements / 반복요소
         public void AddUngroupedNode(Dialogue_Node node)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             if (!ungroupedNodes.ContainsKey(nodeName))
             {
@@ -255,13 +388,14 @@ namespace DialogueSystem.Windows
 
             if (ungroupedNodesList.Count == 2)
             {
+                RepeatedNamesAmount++;
                 ungroupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
 
         public void RemoveUngroupedNode(Dialogue_Node node)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
             List<Dialogue_Node> ungroupedNodesList = ungroupedNodes[nodeName].Nodes;
 
 
@@ -271,6 +405,7 @@ namespace DialogueSystem.Windows
 
             if (ungroupedNodesList.Count == 1)
             {
+                RepeatedNamesAmount--;
                 ungroupedNodesList[0].ResetStyle();
                 return;
             }
@@ -282,9 +417,9 @@ namespace DialogueSystem.Windows
 
         }
 
-        public void AddGroupedNode(Dialogue_Node node, Group group)
+        public void AddGroupedNode(Dialogue_Node node, Dialogue_Group group)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             node.Group = group;
 
@@ -311,13 +446,14 @@ namespace DialogueSystem.Windows
 
             if (groupedNodesList.Count == 2)
             {
+                RepeatedNamesAmount++;
                 groupedNodesList[0].SetErrorStyle(errorColor);
             }
         }
 
         public void RemoveGroupedNode(Dialogue_Node node, Group group)
         {
-            string nodeName = node.DialogueName;
+            string nodeName = node.DialogueName.ToLower();
 
             node.Group = null;
 
@@ -328,6 +464,7 @@ namespace DialogueSystem.Windows
 
             if (groupedNodesList.Count == 1)
             {
+                RepeatedNamesAmount--;
                 groupedNodesList[0].ResetStyle();
                 return;
             }
@@ -342,9 +479,59 @@ namespace DialogueSystem.Windows
                 }
             }
         }
+
+        private void AddGroup(Dialogue_Group group)
+        {
+            string groupName = group.title.ToLower();
+
+            if (!groups.ContainsKey(groupName))
+            {
+                D_GroupErrorData errorData = new D_GroupErrorData();
+                errorData.Groups.Add(group);
+                groups.Add(groupName, errorData);
+
+                return;
+            }
+
+            List<Dialogue_Group> groupList = groups[groupName].Groups;
+            groupList.Add(group);
+
+            Color errorColor = groups[groupName].ErrorData.Color;
+            group.SetErrorStyle(errorColor);
+
+            if (groupList.Count == 2)
+            {
+                RepeatedNamesAmount++;
+                groupList[0].SetErrorStyle(errorColor);
+            }
+        }
+
+        private void RemoveGroup(Dialogue_Group group)
+        {
+            string oldGroupName = group.OldTitle.ToLower();
+
+            List<Dialogue_Group> groupsList = groups[oldGroupName].Groups;
+
+            groupsList.Remove(group);
+
+            group.ResetStyle();
+
+            if (groupsList.Count == 1)
+            {
+                RepeatedNamesAmount--;
+                groupsList[0].ResetStyle();
+
+                return;
+            }
+
+            if (groupsList.Count == 0)
+            {
+                groups.Remove(oldGroupName);
+            }
+        }
         #endregion
 
-        #region Utility
+        #region Utility / 유틸리티
         public Vector2 GetLocalMousePosition(Vector2 m_pos, bool isSearchWindow = false)
         {
             Vector2 worldMousePosition = m_pos;

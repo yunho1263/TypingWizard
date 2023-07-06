@@ -4,19 +4,27 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem.Elements
+namespace DialogueSystem.Enums
 {
-    using Windows;
-    using Utilities;
     public enum DialogueNodeType
     {
         Single,
         Branch
     }
+}
+
+namespace DialogueSystem.Elements
+{
+    using Windows;
+    using Utilities;
+    using Enums;
+    using Data.Save;
 
     [Serializable]
     public class Dialogue_Node : Node
     {
+        public string ID { get; set; }
+
         public DialogueNodeType DialogueType { get; set; }
 
         //다이얼로그 이름
@@ -26,18 +34,19 @@ namespace DialogueSystem.Elements
         public string Text { get; set; }
         
         // 분기
-        public List<string> Branchs { get; set; }
+        public List<D_BranchSaveData> Branchs { get; set; }
 
         // 그룹
-        public Group Group { get; set; }
+        public Dialogue_Group Group { get; set; }
 
-        private D_GraphView graphView;
+        protected D_GraphView graphView;
         private Color defalutBackgroundColor;
 
         public virtual void initialize(D_GraphView d_GraphView,  Vector2 pos)
         {
+            ID = Guid.NewGuid().ToString();
             DialogueName = "DialogueName";
-            Branchs = new List<string>();
+            Branchs = new List<D_BranchSaveData>();
             Text = "sentences";
 
             graphView = d_GraphView;
@@ -51,25 +60,28 @@ namespace DialogueSystem.Elements
 
         public virtual void Draw()
         {
-            // 화자 이름
-            TextField DialogueNameTextField = D_ElementUtilitie.CreateTextField(DialogueName, (callback) =>
+            // 대화 이름
+            TextField DialogueNameTextField = D_ElementUtilitie.CreateTextField(DialogueName, null, (callback) =>
             {
+                TextField target = callback.target as TextField;
+                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
 
-                    DialogueName = callback.newValue;
+                    DialogueName = target.value;
 
                     graphView.AddUngroupedNode(this);
 
                     return;
                 }
 
-                Group currentGroup = Group;
+                Dialogue_Group currentGroup = Group;
 
                 graphView.RemoveGroupedNode(this, Group);
 
-                DialogueName = callback.newValue;
+                DialogueName = target.value;
 
                 graphView.AddGroupedNode(this, currentGroup);
             });
@@ -102,6 +114,46 @@ namespace DialogueSystem.Elements
             RefreshExpandedState();
         }
 
+        #region Override Methods / 오버라이드 메소드
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            evt.menu.AppendAction("Disconnect Input Ports", (action) => DisconnectInputPorts());
+            evt.menu.AppendAction("Disconnect Output Ports", (action) => DisconnectOutputPorts());
+
+            base.BuildContextualMenu(evt);
+        }
+        #endregion
+
+        #region Utility Methods / 유틸리티 메소드
+        public void DisconnectAllPorts()
+        {
+            DisconnectInputPorts();
+            DisconnectOutputPorts();
+        }
+
+        private void DisconnectInputPorts()
+        {
+            Disconnectports(inputContainer);
+        }
+
+        private void DisconnectOutputPorts()
+        {
+            Disconnectports(outputContainer);
+        }
+
+        private void Disconnectports(VisualElement container)
+        {
+            foreach (Port port in container.Children())
+            {
+                if (!port.connected)
+                {
+                    continue;
+                }
+
+                graphView.DeleteElements(port.connections);
+            }
+        }
+
         public void SetErrorStyle(Color color)
         {
             mainContainer.style.backgroundColor = color;
@@ -111,5 +163,6 @@ namespace DialogueSystem.Elements
         {
             mainContainer.style.backgroundColor = defalutBackgroundColor;
         }
+        #endregion
     }
 }

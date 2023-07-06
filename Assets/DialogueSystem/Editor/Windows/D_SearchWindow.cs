@@ -1,11 +1,10 @@
-using DialogueSystem.Elements;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace DialogueSystem.Windows
 {
+    using Enums;
     using Elements;
     public class D_SearchWindow : ScriptableObject, ISearchWindowProvider
     {
@@ -68,8 +67,7 @@ namespace DialogueSystem.Windows
 
                 case Group _:
                 {
-                    Group group = graphView.CreateGroup("Dialogue Group", localMousePosition);
-                    graphView.AddElement(group);
+                    graphView.CreateGroup("Dialogue Group", localMousePosition);
                     return true;
                 }
 

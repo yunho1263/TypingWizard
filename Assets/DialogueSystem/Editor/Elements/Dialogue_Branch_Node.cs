@@ -4,8 +4,10 @@ using UnityEngine.UIElements;
 
 namespace DialogueSystem.Elements
 {
+    using Enums;
     using Windows;
     using Utilities;
+    using Data.Save;
     using static Codice.CM.Common.BranchExplorerData;
 
     public class Dialogue_Branch_Node : Dialogue_Node
@@ -15,7 +17,13 @@ namespace DialogueSystem.Elements
             base.initialize(d_GraphView, pos);
 
             DialogueType = DialogueNodeType.Branch;
-            Branchs.Add("New Branch");
+
+            D_BranchSaveData branchData = new D_BranchSaveData()
+            {
+                Text = "New Branch"
+            };
+
+            Branchs.Add(branchData);
         }
 
         public override void Draw()
@@ -24,8 +32,14 @@ namespace DialogueSystem.Elements
 
             Button addBranchButton = D_ElementUtilitie.CreateButton("Add Branch", () =>
             {
-                Port outputPort = CreateBranchPort("New Branch");
-                Branchs.Add("New Branch");
+                D_BranchSaveData branchData = new D_BranchSaveData()
+                {
+                    Text = "New Branch"
+                };
+
+                Branchs.Add(branchData);
+
+                Port outputPort = CreateBranchPort(branchData);
                 outputContainer.Add(outputPort);
             });
 
@@ -33,7 +47,7 @@ namespace DialogueSystem.Elements
             mainContainer.Insert(1, addBranchButton);
 
             // 다음 대화
-            foreach (string branch in Branchs)
+            foreach (D_BranchSaveData branch in Branchs)
             {
                 Port outputPort = CreateBranchPort(branch);
                 outputContainer.Add(outputPort);
@@ -42,13 +56,35 @@ namespace DialogueSystem.Elements
             RefreshExpandedState();
         }
 
-        private Port CreateBranchPort(string branch)
+        private Port CreateBranchPort(object userData)
         {
             Port outputPort = this.CreatePort();
-            Button DeleteBranchButton = D_ElementUtilitie.CreateButton("X");
+
+            outputPort.userData = userData;
+
+            D_BranchSaveData branchData = userData as D_BranchSaveData;
+
+            Button DeleteBranchButton = D_ElementUtilitie.CreateButton("X", () =>
+            {
+                if (Branchs.Count == 1)
+                {
+                    return;
+                }
+
+                if (outputPort.connected)
+                {
+                    graphView.DeleteElements(outputPort.connections);
+                }
+
+                Branchs.Remove(branchData);
+                graphView.RemoveElement(outputPort);
+            });
             DeleteBranchButton.AddToClassList("ds-node__button");
 
-            TextField branchTextField = D_ElementUtilitie.CreateTextField(branch);
+            TextField branchTextField = D_ElementUtilitie.CreateTextField(branchData.Text, null, callback =>
+            {
+                branchData.Text = callback.newValue;
+            });
 
             branchTextField.AddClasses
             (

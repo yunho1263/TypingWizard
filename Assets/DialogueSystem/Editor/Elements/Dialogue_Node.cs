@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Linq;
 
 namespace DialogueSystem.Enums
 {
@@ -66,6 +67,21 @@ namespace DialogueSystem.Elements
                 TextField target = callback.target as TextField;
                 target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
 
+                if (string.IsNullOrEmpty(target.value))
+                {
+                    if (!string.IsNullOrEmpty(DialogueName))
+                    {
+                        graphView.NameErrorsAmount++;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(DialogueName))
+                    {
+                        graphView.NameErrorsAmount--;
+                    }
+                }
+
                 if (Group == null)
                 {
                     graphView.RemoveUngroupedNode(this);
@@ -101,7 +117,10 @@ namespace DialogueSystem.Elements
             VisualElement customDataContainer = new VisualElement();
             customDataContainer.AddToClassList("ds-node__custom-data-container");
             Foldout textFoldout = D_ElementUtilitie.CreateFoldout("Dialogue Text");
-            TextField textTextField = D_ElementUtilitie.CreateTextArea(Text);
+            TextField textTextField = D_ElementUtilitie.CreateTextArea(Text, null, callback =>
+            {
+                Text = callback.newValue;
+            });
             textTextField.AddClasses
             (
                 "ds-node__textfield",
@@ -152,6 +171,13 @@ namespace DialogueSystem.Elements
 
                 graphView.DeleteElements(port.connections);
             }
+        }
+
+        public bool IsStartingNode()
+        {
+            Port inputPort = inputContainer.Children().First() as Port;
+
+            return !inputPort.connected;
         }
 
         public void SetErrorStyle(Color color)

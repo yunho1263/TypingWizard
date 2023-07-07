@@ -4,11 +4,15 @@ using UnityEngine.UIElements;
 
 namespace DialogueSystem.Windows
 {
+    using System;
     using Utilities;
 
     public class DialogueEditorWindow : EditorWindow
     {
+        private D_GraphView graphView;
+
         private readonly string defaultFileName = "NewDialogue";
+
         private TextField fileNameTextField;
         private Button saveButton;
 
@@ -29,7 +33,7 @@ namespace DialogueSystem.Windows
         #region Adding Elements / 엘리먼트 추가
         private void AddGraphView()
         {
-            var graphView = new D_GraphView(this);
+            graphView = new D_GraphView(this);
             graphView.StretchToParentSize();
             rootVisualElement.Add(graphView);
         }
@@ -43,7 +47,7 @@ namespace DialogueSystem.Windows
                 fileNameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
             });
 
-            saveButton = D_ElementUtilitie.CreateButton("Save");
+            saveButton = D_ElementUtilitie.CreateButton("Save", () => Save());
 
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
@@ -53,9 +57,30 @@ namespace DialogueSystem.Windows
             rootVisualElement.Add(toolbar);
         }
 
+        
+
         private void AddStyle()
         {
             rootVisualElement.AddStyleSheets("DialogueSystem/D_Variables.uss");
+        }
+        #endregion
+
+        #region Toolbar Actions / 툴바 작업
+        private void Save()
+        {
+            if (string.IsNullOrEmpty(fileNameTextField.value))
+            {
+                EditorUtility.DisplayDialog(
+                    "Invalid file name.",
+                    "Please enter a valid file name.",
+                    "OK"
+                    );
+
+                return;
+            }
+
+            D_IO_Utility.Initialize(graphView, fileNameTextField.value);
+            D_IO_Utility.Save();
         }
         #endregion
 

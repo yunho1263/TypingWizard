@@ -12,9 +12,9 @@ namespace DialogueSystem.Elements
 
     public class Dialogue_Branch_Node : Dialogue_Node
     {
-        public override void initialize(D_GraphView d_GraphView, Vector2 pos)
+        public override void initialize(string nodeName, D_GraphView d_GraphView, Vector2 pos)
         {
-            base.initialize(d_GraphView, pos);
+            base.initialize(nodeName, d_GraphView, pos);
 
             DialogueType = DialogueNodeType.Branch;
 

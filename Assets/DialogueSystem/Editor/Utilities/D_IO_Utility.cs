@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEditor;
 using System;
@@ -25,6 +25,9 @@ namespace DialogueSystem.Utilities
         private static Dictionary<string, D_DialogueGroupSO> createdDialogueGroups;
         private static Dictionary<string, D_DialogueSO> createdDialogues;
 
+        private static Dictionary<string, Dialogue_Group> loadedGroups;
+        private static Dictionary<string, Dialogue_Node> loadedNodes;
+
         public static void Initialize(D_GraphView d_graphView, string graphName)
         {
             graphView = d_graphView;
@@ -36,6 +39,9 @@ namespace DialogueSystem.Utilities
 
             createdDialogueGroups = new Dictionary<string, D_DialogueGroupSO>();
             createdDialogues = new Dictionary<string, D_DialogueSO>();
+
+            loadedGroups = new Dictionary<string, Dialogue_Group>();
+            loadedNodes = new Dictionary<string, Dialogue_Node>();
         }
 
 
@@ -146,22 +152,9 @@ namespace DialogueSystem.Utilities
             UpdateOldUngroupsNodes(ungroupedNodeNames, graphData);
         }
 
-        
-
         private static void SaveNodeToGraph(Dialogue_Node node, D_GraphSaveDataSO graphData)
         {
-            List<D_BranchSaveData> branches = new List<D_BranchSaveData>();
-
-            foreach (D_BranchSaveData branch in node.Branchs)
-            {
-                D_BranchSaveData branchData = new D_BranchSaveData()
-                {
-                    Text = branch.Text,
-                    NodeId = branch.NodeId
-                };
-
-                branches.Add(branchData);
-            }
+            List<D_BranchSaveData> branches = CloneNodeBranchs(node.Branchs);
 
             D_NodeSaveData nodeData = new D_NodeSaveData()
             {
@@ -288,6 +281,104 @@ namespace DialogueSystem.Utilities
 
         #endregion
 
+        #region Load Methods / 불러오기 메소드
+        public static void Load()
+        {
+            D_GraphSaveDataSO graphData = LoadAsset<D_GraphSaveDataSO>("Assets/DialogueSystem/Editor/Graphs", graphFileName);
+
+            if (graphData == null)
+            {
+                EditorUtility.DisplayDialog("Error", "No graph data found", "OK");
+
+                return;
+            }
+
+            DialogueEditorWindow.UpdateFileName(graphData.FileName);
+
+            LoadGroups(graphData.Groups);
+            LoadNodes(graphData.Nodes);
+            LoadNodesConnections();
+        }
+
+        private static void LoadGroups(List<D_GroupSaveData> groups)
+        {
+            foreach (D_GroupSaveData groupDate in groups)
+            {
+                Dialogue_Group group = graphView.CreateGroup(groupDate.Name, groupDate.Position);
+
+                group.ID = groupDate.ID;
+
+                loadedGroups.Add(group.ID, group);
+            }
+        }
+
+        private static void LoadNodes(List<D_NodeSaveData> nodes)
+        {
+            foreach (D_NodeSaveData nodeData in nodes)
+            {
+                List<D_BranchSaveData> branches = CloneNodeBranchs(nodeData.Branchs);
+                Dialogue_Node node = graphView.CreateNode(nodeData.Name, nodeData.DialogueType, nodeData.Position, false);
+
+                node.ID = nodeData.ID;
+                node.Branchs = branches;
+                node.Text = nodeData.Text;
+
+                node.Draw();
+
+                graphView.AddElement(node);
+                loadedNodes.Add(node.ID, node);
+
+                if (string.IsNullOrEmpty(nodeData.GroupID))
+                {
+                    continue;
+                }
+
+                Dialogue_Group group = loadedGroups[nodeData.GroupID];
+                node.Group = group;
+                group.AddElement(node);
+            }
+        }
+
+        private static void LoadNodesConnections()
+        {
+            foreach (KeyValuePair<string, Dialogue_Node> loadedNode in loadedNodes)
+            {
+                foreach (Port branchPort in loadedNode.Value.outputContainer.Children())
+                {
+                    D_BranchSaveData branchData = branchPort.userData as D_BranchSaveData;
+
+                    if (string.IsNullOrEmpty(branchData.NodeId))
+                    {
+                        continue;
+                    }
+
+                    Dialogue_Node nextNode = loadedNodes[branchData.NodeId];
+
+                    Port nextNodeInputPort = nextNode.inputContainer.Children().First() as Port;
+
+                    Edge edge = branchPort.ConnectTo(nextNodeInputPort);
+
+                    graphView.AddElement(edge);
+
+                    loadedNode.Value.RefreshPorts();
+                }
+            }
+        }
+        #endregion
+
+        #region Creation Methods / 생성 메소드
+        private static void CreateStaticFolders()
+        {
+            CreateFolder("Assets/DialogueSystem", "DialogueData");
+            CreateFolder("Assets/DialogueSystem/Editor", "Graphs");
+
+            CreateFolder("Assets/DialogueSystem/DialogueData", graphFileName);
+            CreateFolder(containerFolderPath, "Global");
+            CreateFolder(containerFolderPath, "Groups");
+            CreateFolder($"{containerFolderPath}/Global", "Dialogues");
+        }
+        #endregion
+
         #region Fetch Methods / 가져오기 메소드
         private static void GetElementsFromGraphView()
         {
@@ -314,19 +405,6 @@ namespace DialogueSystem.Utilities
         }
         #endregion
 
-        #region Creation Methods / 생성 메소드
-        private static void CreateStaticFolders()
-        {
-            CreateFolder("Assets/DialogueSystem", "DialogueData");
-            CreateFolder("Assets/DialogueSystem/Editor", "Graphs");
-
-            CreateFolder("Assets/DialogueSystem/DialogueData", graphFileName);
-            CreateFolder(containerFolderPath, "Global");
-            CreateFolder(containerFolderPath, "Groups");
-            CreateFolder($"{containerFolderPath}/Global", "Dialogues");
-        }
-        #endregion
-
         #region Utility Methods / 유틸리티 메소드
         private static void CreateFolder(string path, string folderName)
         {
@@ -347,8 +425,7 @@ namespace DialogueSystem.Utilities
         private static T CreateAsset<T>(string path, string assetName) where T : ScriptableObject
         {
             string fullPath = $"{path}/{assetName}.asset";
-
-            T asset = AssetDatabase.LoadAssetAtPath<T>(fullPath);
+            T asset = LoadAsset<T>(path, assetName);
 
             if (asset == null)
             {
@@ -359,6 +436,12 @@ namespace DialogueSystem.Utilities
 
 
             return asset;
+        }
+
+        private static T LoadAsset<T>(string path, string assetName) where T : ScriptableObject
+        {
+            string fullPath = $"{path}/{assetName}.asset";
+            return AssetDatabase.LoadAssetAtPath<T>(fullPath);
         }
 
         private static void RemoveAsset(string path, string assetName)
@@ -372,6 +455,24 @@ namespace DialogueSystem.Utilities
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+        }
+
+        private static List<D_BranchSaveData> CloneNodeBranchs(List<D_BranchSaveData> nodeBranchs)
+        {
+            List<D_BranchSaveData> branches = new List<D_BranchSaveData>();
+
+            foreach (D_BranchSaveData branch in nodeBranchs)
+            {
+                D_BranchSaveData branchData = new D_BranchSaveData()
+                {
+                    Text = branch.Text,
+                    NodeId = branch.NodeId
+                };
+
+                branches.Add(branchData);
+            }
+
+            return branches;
         }
         #endregion
     }

@@ -53,14 +53,14 @@ namespace DialogueSystem.Windows
             {
                 case DialogueNodeType.Single:
                 {
-                    Dialogue_Node single_Node = graphView.CreateNode(DialogueNodeType.Single, localMousePosition);
+                    Dialogue_Node single_Node = graphView.CreateNode("DialogueName", DialogueNodeType.Single, localMousePosition);
                     graphView.AddElement(single_Node);
                     return true;
                 }
 
                 case DialogueNodeType.Branch:
                 {
-                    Dialogue_Branch_Node branch_Node = graphView.CreateNode(DialogueNodeType.Branch, localMousePosition) as Dialogue_Branch_Node;
+                    Dialogue_Branch_Node branch_Node = graphView.CreateNode("DialogueName", DialogueNodeType.Branch, localMousePosition) as Dialogue_Branch_Node;
                     graphView.AddElement(branch_Node);
                     return true;
                 }

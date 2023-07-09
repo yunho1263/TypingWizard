@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -13,8 +14,9 @@ namespace DialogueSystem.Windows
 
         private readonly string defaultFileName = "NewDialogue";
 
-        private TextField fileNameTextField;
+        private static TextField fileNameTextField;
         private Button saveButton;
+        private Button minimapButton;
 
         [MenuItem("Window/DialogueSystem/Dialogue Graph")]
         public static void Open()
@@ -49,15 +51,22 @@ namespace DialogueSystem.Windows
 
             saveButton = D_ElementUtilitie.CreateButton("Save", () => Save());
 
+            Button loadButton = D_ElementUtilitie.CreateButton("Load", () => Load());
+            Button clearButton = D_ElementUtilitie.CreateButton("Clear", () => Clear());
+            Button resetButton = D_ElementUtilitie.CreateButton("Reset", () => ResetGraph());
+            minimapButton = D_ElementUtilitie.CreateButton("Minimap", () => ToggleMinimap());
+
             toolbar.Add(fileNameTextField);
             toolbar.Add(saveButton);
+            toolbar.Add(loadButton);
+            toolbar.Add(clearButton);
+            toolbar.Add(resetButton);
+            toolbar.Add(minimapButton);
 
             toolbar.AddStyleSheets("DialogueSystem/D_Toolbar_Style.uss");
 
             rootVisualElement.Add(toolbar);
         }
-
-        
 
         private void AddStyle()
         {
@@ -82,9 +91,47 @@ namespace DialogueSystem.Windows
             D_IO_Utility.Initialize(graphView, fileNameTextField.value);
             D_IO_Utility.Save();
         }
+
+        private void Load()
+        {
+            string filePath = EditorUtility.OpenFilePanel("Load Dialogue Graph", "Assets/DialogueSystem/Editor/Graphs", "asset");
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return;
+            }
+
+            Clear();
+
+            D_IO_Utility.Initialize(graphView, Path.GetFileNameWithoutExtension(filePath));
+            D_IO_Utility.Load();
+        }
+
+        private void Clear()
+        {
+            graphView.ClearGraph();
+        }
+
+        private void ResetGraph()
+        {
+            Clear();
+            UpdateFileName(defaultFileName);
+        }
+
+        private void ToggleMinimap()
+        {
+            graphView.ToggleMinimap();
+
+            minimapButton.ToggleInClassList("ds-Toolbar__button__selected");
+        }
         #endregion
 
         #region Utility Methods / 유틸리티 메소드
+        public static void UpdateFileName(string newFileName)
+        {
+            fileNameTextField.value = newFileName;
+        }
+
         public void EnableSaveButton()
         {
             saveButton.SetEnabled(true);

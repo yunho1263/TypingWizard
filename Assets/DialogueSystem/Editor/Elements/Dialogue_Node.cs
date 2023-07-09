@@ -5,15 +5,6 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System.Linq;
 
-namespace DialogueSystem.Enums
-{
-    public enum DialogueNodeType
-    {
-        Single,
-        Branch
-    }
-}
-
 namespace DialogueSystem.Elements
 {
     using Windows;
@@ -43,10 +34,10 @@ namespace DialogueSystem.Elements
         protected D_GraphView graphView;
         private Color defalutBackgroundColor;
 
-        public virtual void initialize(D_GraphView d_GraphView,  Vector2 pos)
+        public virtual void initialize(string nodeName, D_GraphView d_GraphView,  Vector2 pos)
         {
             ID = Guid.NewGuid().ToString();
-            DialogueName = "DialogueName";
+            DialogueName = nodeName;
             Branchs = new List<D_BranchSaveData>();
             Text = "sentences";
 

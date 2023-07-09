@@ -17,6 +17,8 @@ namespace DialogueSystem.Windows
         private D_SearchWindow searchWindow;
         private DialogueEditorWindow editorWindow;
 
+        private MiniMap miniMap;
+
         private SerializableDictionary<string, D_NodeErrorData> ungroupedNodes;
         private SerializableDictionary<Group, SerializableDictionary<string, D_NodeErrorData>> groupedNodes;
         private SerializableDictionary<string, D_GroupErrorData> groups;
@@ -53,6 +55,7 @@ namespace DialogueSystem.Windows
 
             AddManipulators();
             AddSearchWindow();
+            AddMiniMap();
             AddGridBackground();
 
             OnElementsDeleted();
@@ -62,6 +65,7 @@ namespace DialogueSystem.Windows
             OnGraphViewChanged();
 
             AddStyles();
+            AddMiniMapStyles();
         }
 
         #region Override Methods / 오버라이드 메소드
@@ -120,7 +124,8 @@ namespace DialogueSystem.Windows
         {
             ContextualMenuManipulator menuManipulator = new ContextualMenuManipulator((evt) =>
             {
-                evt.menu.AppendAction(actionTitle, (action) => { AddElement(CreateNode(NodeType, GetLocalMousePosition(action.eventInfo.localMousePosition))); });
+                evt.menu.AppendAction(actionTitle, (action) => 
+                { AddElement(CreateNode("DialogueName", NodeType, GetLocalMousePosition(action.eventInfo.localMousePosition))); });
             });
 
             return menuManipulator;
@@ -129,13 +134,17 @@ namespace DialogueSystem.Windows
         #endregion
 
         #region Create / 생성
-        public Dialogue_Node CreateNode(DialogueNodeType newNodeType, Vector2 position)
+        public Dialogue_Node CreateNode(string nodeName, DialogueNodeType newNodeType, Vector2 position, bool shouldDraw = true)
         {
             Type nodeType = Type.GetType($"DialogueSystem.Elements.Dialogue_{newNodeType}_Node");
             Dialogue_Node node = Activator.CreateInstance(nodeType) as Dialogue_Node;
 
-            node.initialize(this, position);
-            node.Draw();
+            node.initialize(nodeName, this, position);
+
+            if (shouldDraw)
+            {
+                node.Draw();
+            }
 
             AddUngroupedNode(node);
 
@@ -193,6 +202,33 @@ namespace DialogueSystem.Windows
             {
                 SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), searchWindow);
             };
+        }
+
+        private void AddMiniMap()
+        {
+            miniMap = new MiniMap()
+            {
+                anchored = true
+            };
+
+            miniMap.SetPosition(new Rect(15, 50, 200, 180));
+
+            Add(miniMap);
+
+            miniMap.visible = false;
+        }
+
+
+        private void AddMiniMapStyles()
+        {
+            StyleColor backgroundColor = new StyleColor(new Color32(29, 29, 30, 255));
+            StyleColor borderColor = new StyleColor(new Color32(51, 51, 51, 255));
+
+            miniMap.style.backgroundColor = backgroundColor;
+            miniMap.style.borderTopColor = borderColor;
+            miniMap.style.borderRightColor = borderColor;
+            miniMap.style.borderBottomColor = borderColor;
+            miniMap.style.borderLeftColor = borderColor;
         }
         #endregion
 
@@ -558,6 +594,26 @@ namespace DialogueSystem.Windows
 
             Vector2 localMousePosition = contentViewContainer.WorldToLocal(worldMousePosition);
             return localMousePosition;
+        }
+
+        public void ClearGraph()
+        {
+            graphElements.ForEach((element) =>
+            {
+                RemoveElement(element);
+            });
+
+            groups.Clear();
+            groupedNodes.Clear();
+            ungroupedNodes.Clear();
+
+            NameErrorsAmount = 0;
+            
+        }
+
+        public void ToggleMinimap()
+        {
+            miniMap.visible = !miniMap.visible;
         }
 
         #endregion

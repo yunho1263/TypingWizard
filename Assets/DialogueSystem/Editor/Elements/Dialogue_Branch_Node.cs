@@ -8,16 +8,18 @@ namespace DialogueSystem.Elements
     using Windows;
     using Utilities;
     using Data.Save;
-    using static Codice.CM.Common.BranchExplorerData;
 
     public class Dialogue_Branch_Node : Dialogue_Node
     {
         public override void initialize(string nodeName, D_GraphView d_GraphView, Vector2 pos)
         {
+            // 베이스 초기화 실행
             base.initialize(nodeName, d_GraphView, pos);
 
+            // 노드 타입 설정
             DialogueType = DialogueNodeType.Branch;
 
+            // 노드 타이틀 설정
             D_BranchSaveData branchData = new D_BranchSaveData()
             {
                 Text = "New Branch"
@@ -28,8 +30,10 @@ namespace DialogueSystem.Elements
 
         public override void Draw()
         {
+            // 베이스 드로우 실행
             base.Draw();
 
+            // 브렌치 추가 버튼 그리기
             Button addBranchButton = D_ElementUtilitie.CreateButton("Add Branch", () =>
             {
                 D_BranchSaveData branchData = new D_BranchSaveData()
@@ -46,7 +50,6 @@ namespace DialogueSystem.Elements
             addBranchButton.AddToClassList("ds-node__button");
             mainContainer.Insert(1, addBranchButton);
 
-            // 다음 대화
             foreach (D_BranchSaveData branch in Branchs)
             {
                 Port outputPort = CreateBranchPort(branch);
@@ -56,7 +59,7 @@ namespace DialogueSystem.Elements
             RefreshExpandedState();
         }
 
-        private Port CreateBranchPort(object userData)
+        private Port CreateBranchPort(object userData) // 브렌치 포트 생성
         {
             Port outputPort = this.CreatePort();
 

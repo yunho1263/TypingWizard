@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4be150cec042840a77b04b0ed0a0f8, type: 3}
+  m_Name: testGraphGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: testGraph
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: bcfa6a4f-e425-4154-b957-b256bf528247
+    <Name>k__BackingField: asdf
+    <Position>k__BackingField: {x: 295, y: 176}
+  - <ID>k__BackingField: 958f6300-d9e7-4f34-9bc6-3b744f18a1c2
+    <Name>k__BackingField: qwer
+    <Position>k__BackingField: {x: 832, y: 146}
+  - <ID>k__BackingField: bb498f47-4540-4b14-aeb9-0a2cc41e566c
+    <Name>k__BackingField: DialogueGroup
+    <Position>k__BackingField: {x: 403, y: 508}
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 4e4baa76-a835-4517-acf4-2beaed92c185
+    <Name>k__BackingField: DialogueName
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeId>k__BackingField: 
+    <GroupID>k__BackingField: 958f6300-d9e7-4f34-9bc6-3b744f18a1c2
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 857, y: 205}
+  - <ID>k__BackingField: 4f19da1b-9657-45ca-9081-33fd22b320d4
+    <Name>k__BackingField: DialogueName
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: New Branch
+      <NodeId>k__BackingField: 4e4baa76-a835-4517-acf4-2beaed92c185
+    <GroupID>k__BackingField: bcfa6a4f-e425-4154-b957-b256bf528247
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 320, y: 235}
+  - <ID>k__BackingField: 22d29b92-38d6-4eee-9565-57684d79847c
+    <Name>k__BackingField: DialogueName
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeId>k__BackingField: 4f19da1b-9657-45ca-9081-33fd22b320d4
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: -36, y: 259}
+  - <ID>k__BackingField: 8ed09a6e-0c91-4917-b914-b923e798e38d
+    <Name>k__BackingField: DialogueName
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeId>k__BackingField: 34f48a08-40a0-4fc2-bfae-642e35a3af7f
+    <GroupID>k__BackingField: bb498f47-4540-4b14-aeb9-0a2cc41e566c
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 428, y: 619}
+  - <ID>k__BackingField: 34f48a08-40a0-4fc2-bfae-642e35a3af7f
+    <Name>k__BackingField: ddddd
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: New Branch
+      <NodeId>k__BackingField: 4136f6e8-af2d-4977-a397-c2dd6a6f4567
+    - <Text>k__BackingField: New Branch
+      <NodeId>k__BackingField: 4136f6e8-af2d-4977-a397-c2dd6a6f4567
+    - <Text>k__BackingField: New Branch
+      <NodeId>k__BackingField: 0f682741-2ba1-4145-bd4f-d0ffc77e8664
+    <GroupID>k__BackingField: bb498f47-4540-4b14-aeb9-0a2cc41e566c
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 741, y: 595}
+  - <ID>k__BackingField: 4136f6e8-af2d-4977-a397-c2dd6a6f4567
+    <Name>k__BackingField: ddda
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeId>k__BackingField: 
+    <GroupID>k__BackingField: bb498f47-4540-4b14-aeb9-0a2cc41e566c
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1106, y: 567}
+  - <ID>k__BackingField: 0f682741-2ba1-4145-bd4f-d0ffc77e8664
+    <Name>k__BackingField: dasdas
+    <Text>k__BackingField: sentences
+    <Branchs>k__BackingField:
+    - <Text>k__BackingField: Next Dialogue
+      <NodeId>k__BackingField: 
+    <GroupID>k__BackingField: bb498f47-4540-4b14-aeb9-0a2cc41e566c
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1106, y: 774}
+  <OldGroupNames>k__BackingField:
+  - asdf
+  - qwer
+  - DialogueGroup
+  <OldUngroupedNodeNames>k__BackingField:
+  - DialogueName
+  <OldGroupedNodeNames>k__BackingField:
+    list:
+    - Key: qwer
+      Value:
+      - DialogueName
+    - Key: asdf
+      Value:
+      - DialogueName
+    - Key: DialogueGroup
+      Value:
+      - DialogueName
+      - ddddd
+      - ddda
+      - dasdas

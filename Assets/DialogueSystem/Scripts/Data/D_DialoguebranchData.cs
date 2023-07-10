@@ -1,9 +1,9 @@
-using DialogueSystem.ScrObj;
 using System;
 using UnityEngine;
 
 namespace DialogueSystem.Data
 {
+    using ScrObj;
     [Serializable]
 
     public class D_DialoguebranchData

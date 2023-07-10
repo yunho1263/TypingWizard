@@ -2289,12 +2289,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c304a424e2aa3904aa14f350632586eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 0}
-  dialogueGroup: {fileID: 0}
-  dialogue: {fileID: 0}
-  groupedDialogue: 0
+  dialogueContainer: {fileID: 11400000, guid: 3eec6c853ccf5c847b79cb9d10036544, type: 2}
+  dialogueGroup: {fileID: 11400000, guid: 88770a02a0632bb4d9bb28136d95739c, type: 2}
+  dialogue: {fileID: 11400000, guid: d45291efc7408d744af4d812da661861, type: 2}
+  groupedDialogue: 1
   startingDialogueOnly: 0
-  selectedDialogueGroupIndex: 0
+  selectedDialogueGroupIndex: 2
   selectedDialogueIndex: 0
 --- !u!1 &1508741189
 GameObject:

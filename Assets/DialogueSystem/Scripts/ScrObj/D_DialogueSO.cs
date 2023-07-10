@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -13,7 +12,7 @@ namespace DialogueSystem.ScrObj
         [field: SerializeField] [field:TextArea()] public string Text { get; set; }
         [field: SerializeField] public List<D_DialoguebranchData> Branchs { get; set; }
         [field: SerializeField] public DialogueNodeType NodeType { get; set; }
-        [field: SerializeField] public bool IsStartDialogue { get; set; }
+        [field: SerializeField] public bool IsStartingDialogue { get; set; }
 
         public void Initialize(string dialogueName, string text, List<D_DialoguebranchData> branch, DialogueNodeType nodeType, bool isStart)
         {
@@ -21,7 +20,7 @@ namespace DialogueSystem.ScrObj
             Text = text;
             Branchs = branch;
             NodeType = nodeType;
-            IsStartDialogue = isStart;
+            IsStartingDialogue = isStart;
         }
     }
 }

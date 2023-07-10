@@ -114,7 +114,7 @@ namespace DialogueSystem.Windows
         {
             ContextualMenuManipulator menuManipulator = new ContextualMenuManipulator((evt) =>
             {
-                evt.menu.AppendAction("Add group", (action) => { AddElement(CreateGroup("Dialogue Group", GetLocalMousePosition(action.eventInfo.localMousePosition))); });
+                evt.menu.AppendAction("Add group", (action) => { AddElement(CreateGroup("DialogueGroup", GetLocalMousePosition(action.eventInfo.localMousePosition))); });
             });
 
             return menuManipulator;

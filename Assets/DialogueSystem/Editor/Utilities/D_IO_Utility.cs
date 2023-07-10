@@ -12,6 +12,8 @@ namespace DialogueSystem.Utilities
     using ScrObj;
     using Elements;
     using Windows;
+    using UnityEditor.Localization;
+    using UnityEngine.Localization.Tables;
 
     public static class D_IO_Utility
     {
@@ -131,9 +133,16 @@ namespace DialogueSystem.Utilities
         {
             SerializableDictionary<string, List<string>> groupedNodeNames = new SerializableDictionary<string, List<string>>();
             List<string> ungroupedNodeNames = new List<string>();
+            List<string> nodesTexts = new List<string>();
+            var table = LocalizationEditorSettings.GetStringTableCollection("DialogueText");
 
             foreach (Dialogue_Node node in nodes)
             {
+                if (!table.SharedData.Contains("st_D: " + node.Text))
+                {
+                    AddLocalizationKey(table, node.Text);
+                }
+
                 SaveNodeToGraph(node, graphData);
                 SaveNodeToScriptableObject(node, dialogueContainer);
 
@@ -145,11 +154,14 @@ namespace DialogueSystem.Utilities
                 }
 
                 ungroupedNodeNames.Add(node.DialogueName);
+
+                nodesTexts.Add(node.Text);
             }
 
             UpdateDialogueBranchConnections();
             UpdateOldGroupedNode(groupedNodeNames, graphData);
             UpdateOldUngroupsNodes(ungroupedNodeNames, graphData);
+            UpdateOldLocalizationTexts(nodesTexts, graphData);
         }
 
         private static void SaveNodeToGraph(Dialogue_Node node, D_GraphSaveDataSO graphData)
@@ -161,6 +173,7 @@ namespace DialogueSystem.Utilities
                 ID = node.ID,
                 Name = node.DialogueName,
                 Branchs = branches,
+                Speaker = node.Speaker,
                 Text = node.Text,
                 GroupID = node.Group?.ID,
                 DialogueType = node.DialogueType,
@@ -190,6 +203,7 @@ namespace DialogueSystem.Utilities
             dialogue.Initialize
             (
                 node.DialogueName,
+                node.Speaker,
                 node.Text,
                 ConvertNodeBranchsToDialogueBranchs(node.Branchs),
                 node.DialogueType,
@@ -277,6 +291,23 @@ namespace DialogueSystem.Utilities
 
             graphData.OldUngroupedNodeNames = new List<string>(currentUngroupedNodeNames);
         }
+
+        public static void UpdateOldLocalizationTexts(List<string> currentTexts, D_GraphSaveDataSO graphData)
+        {
+            var table = LocalizationEditorSettings.GetStringTableCollection("DialogueText");
+
+            if (graphData.OldTexts != null && graphData.OldTexts.Count != 0)
+            {
+                List<string> textsToRemove = graphData.OldTexts.Except(currentTexts).ToList();
+
+                foreach (string textToRemove in textsToRemove)
+                {
+                    RemoveLocalizationKey(table, textToRemove);
+                }
+            }
+
+            graphData.OldTexts = new List<string>(currentTexts);
+        }
         #endregion
 
         #endregion
@@ -321,6 +352,7 @@ namespace DialogueSystem.Utilities
 
                 node.ID = nodeData.ID;
                 node.Branchs = branches;
+                node.Speaker = nodeData.Speaker;
                 node.Text = nodeData.Text;
 
                 node.Draw();
@@ -473,6 +505,22 @@ namespace DialogueSystem.Utilities
             }
 
             return branches;
+        }
+
+        private static void AddLocalizationKey(StringTableCollection table, string key)
+        {
+            table.SharedData.AddKey("st_D: " + key);
+
+            EditorUtility.SetDirty(table);
+            EditorUtility.SetDirty(table.SharedData);
+        }
+
+        private static void RemoveLocalizationKey(StringTableCollection table, string key)
+        {
+            table.SharedData.RemoveKey("st_D: " + key);
+
+            EditorUtility.SetDirty(table);
+            EditorUtility.SetDirty(table.SharedData);
         }
         #endregion
     }

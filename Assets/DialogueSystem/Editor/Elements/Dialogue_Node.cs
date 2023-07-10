@@ -4,6 +4,9 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Linq;
+using UnityEngine.Localization;
+using UnityEditor.UIElements;
+using UnityEditor;
 
 namespace DialogueSystem.Elements
 {
@@ -22,6 +25,9 @@ namespace DialogueSystem.Elements
         //다이얼로그 이름
         public string DialogueName { get; set; }
 
+        // 화자
+        public string Speaker { get; set; }
+
         // 대화 내용
         public string Text { get; set; }
         
@@ -39,7 +45,8 @@ namespace DialogueSystem.Elements
             ID = Guid.NewGuid().ToString();
             DialogueName = nodeName;
             Branchs = new List<D_BranchSaveData>();
-            Text = "sentences";
+            Speaker = "SpeakerName";
+            Text = "Sentence";
 
             graphView = d_GraphView;
             defalutBackgroundColor = new Color(29f/ 255f, 29f / 255f, 30f / 255f);
@@ -104,10 +111,29 @@ namespace DialogueSystem.Elements
             Port inputPort = this.CreatePort("Dialogue Conection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
             inputContainer.Add(inputPort);
 
+            // 화자
+            VisualElement customDataContainer1 = new VisualElement();
+            customDataContainer1.AddToClassList("ds-node__custom-data-container");
+            Foldout textFoldout1 = D_ElementUtilitie.CreateFoldout("Dialogue Speaker");
+
+            TextField speakerTextField = D_ElementUtilitie.CreateTextField(Speaker, null, callback =>
+            {
+                Speaker = callback.newValue;
+            });
+            speakerTextField.AddClasses
+            (
+                "ds-node__textfield",
+                "ds-node__quote-textfield"
+            );
+            textFoldout1.Add(speakerTextField);
+            customDataContainer1.Add(textFoldout1);
+            extensionContainer.Add(customDataContainer1);
+
             // 대화 내용
-            VisualElement customDataContainer = new VisualElement();
-            customDataContainer.AddToClassList("ds-node__custom-data-container");
-            Foldout textFoldout = D_ElementUtilitie.CreateFoldout("Dialogue Text");
+            VisualElement customDataContainer2 = new VisualElement();
+            customDataContainer2.AddToClassList("ds-node__custom-data-container");
+            Foldout textFoldout2 = D_ElementUtilitie.CreateFoldout("Dialogue Text");
+
             TextField textTextField = D_ElementUtilitie.CreateTextArea(Text, null, callback =>
             {
                 Text = callback.newValue;
@@ -117,9 +143,9 @@ namespace DialogueSystem.Elements
                 "ds-node__textfield",
                 "ds-node__quote-textfield"
             );
-            textFoldout.Add(textTextField);
-            customDataContainer.Add(textFoldout);
-            extensionContainer.Add(customDataContainer);
+            textFoldout2.Add(textTextField);
+            customDataContainer2.Add(textFoldout2);
+            extensionContainer.Add(customDataContainer2);
 
             RefreshExpandedState();
         }

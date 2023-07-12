@@ -12,10 +12,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4be150cec042840a77b04b0ed0a0f8, type: 3}
   m_Name: NewDialogueGraph
   m_EditorClassIdentifier: 
-  <FileName>k__BackingField: 
-  <Groups>k__BackingField: []
-  <Nodes>k__BackingField: []
-  <OldGroupNames>k__BackingField: []
+  <FileName>k__BackingField: NewDialogue
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: b4d6bae9-4b3b-4f36-9b77-1d115a171748
+    <Name>k__BackingField: g1
+    <Position>k__BackingField: {x: 171.99998, y: 62.99999}
+  - <ID>k__BackingField: 764cc434-e72d-4b87-a72e-6599da9291d6
+    <Name>k__BackingField: g2
+    <Position>k__BackingField: {x: 839.00006, y: 103.99999}
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 8c0e3eca-fcb9-4131-a52e-a0f7422afec2
+    <Name>k__BackingField: dddasd
+    <Speaker>k__BackingField: SpeakerName
+    <Ko_Text>k__BackingField: gggfd
+    <Ja_Text>k__BackingField: gtgtg
+    <En_Text>k__BackingField: lklklk
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - g2 - dddasd'
+    <Branchs>k__BackingField:
+    - <branchName>k__BackingField: NextDialogue
+      <Ko_Text>k__BackingField: 
+      <Ja_Text>k__BackingField: 
+      <En_Text>k__BackingField: 
+      <LocalizedTextKey>k__BackingField: 
+      <NodeId>k__BackingField: 
+    <GroupID>k__BackingField: 764cc434-e72d-4b87-a72e-6599da9291d6
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 864, y: 163}
+  - <ID>k__BackingField: e49cb38e-207a-410e-895a-4ee0f1a91f54
+    <Name>k__BackingField: dwwweqwe
+    <Speaker>k__BackingField: SpeakerName
+    <Ko_Text>k__BackingField: ko_Sentence
+    <Ja_Text>k__BackingField: ja_Sentence
+    <En_Text>k__BackingField: en_Sentence
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - g2 - dwwweqwe'
+    <Branchs>k__BackingField:
+    - <branchName>k__BackingField: NextDialogue
+      <Ko_Text>k__BackingField: 
+      <Ja_Text>k__BackingField: 
+      <En_Text>k__BackingField: 
+      <LocalizedTextKey>k__BackingField: 
+      <NodeId>k__BackingField: 
+    <GroupID>k__BackingField: 764cc434-e72d-4b87-a72e-6599da9291d6
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 882, y: 574}
+  - <ID>k__BackingField: e95b9b30-a997-48f8-8e01-af838af447e5
+    <Name>k__BackingField: br
+    <Speaker>k__BackingField: SpeakerName
+    <Ko_Text>k__BackingField: asdasdasdasdasd
+    <Ja_Text>k__BackingField: ddd
+    <En_Text>k__BackingField: aaa
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - g1 - br'
+    <Branchs>k__BackingField:
+    - <branchName>k__BackingField: b2
+      <Ko_Text>k__BackingField: frfrfdsdf
+      <Ja_Text>k__BackingField: vvfrvrrf
+      <En_Text>k__BackingField: rgrtgfsdf
+      <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - g1 - br - b2'
+      <NodeId>k__BackingField: 8c0e3eca-fcb9-4131-a52e-a0f7422afec2
+    - <branchName>k__BackingField: NewBranchName
+      <Ko_Text>k__BackingField: koText
+      <Ja_Text>k__BackingField: jaText
+      <En_Text>k__BackingField: enText
+      <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - g1 - br - NewBranchName'
+      <NodeId>k__BackingField: e49cb38e-207a-410e-895a-4ee0f1a91f54
+    <GroupID>k__BackingField: b4d6bae9-4b3b-4f36-9b77-1d115a171748
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 197, y: 122}
+  <OldGroupNames>k__BackingField:
+  - g1
+  - g2
   <OldUngroupedNodeNames>k__BackingField: []
+  <OldBranchNames>k__BackingField:
+  - 'st_B: NewDialogue - g1 - br - b2'
+  - 'st_B: NewDialogue - g1 - br - NewBranchName'
   <OldGroupedNodeNames>k__BackingField:
-    list: []
+    list:
+    - Key: g2
+      Value:
+      - dddasd
+      - dwwweqwe
+    - Key: g1
+      Value:
+      - br

@@ -3,6 +3,8 @@ using UnityEngine;
 namespace DialogueSystem
 {
     using ScrObj;
+    using System.Collections.Generic;
+
     public class D_Dialogue : MonoBehaviour
     {
         // 스크립터블 오브젝트
@@ -17,5 +19,41 @@ namespace DialogueSystem
         // 인덱스
         [SerializeField] private int selectedDialogueGroupIndex;
         [SerializeField] private int selectedDialogueIndex;
+
+        private Dictionary<string, D_DialogueSO> startingDialogues;
+
+        public void Initialize()
+        {
+            startingDialogues = new Dictionary<string, D_DialogueSO>();
+
+            // 시작 대화를 찾아서 리스트에 추가
+            foreach (D_DialogueGroupSO dialogueGroup in dialogueContainer.DialogueGroups.Keys)
+            {
+                foreach (D_DialogueSO dialogue in dialogueContainer.DialogueGroups[dialogueGroup])
+                {
+                    if (dialogue.IsStartingDialogue)
+                    {
+                        startingDialogues.Add(dialogue.DialogueName, dialogue);
+                    }
+                }
+            }
+
+            foreach (D_DialogueSO dialogue in dialogueContainer.UngroupedDialogues)
+            {
+                if (dialogue.IsStartingDialogue)
+                {
+                    startingDialogues.Add(dialogue.DialogueName, dialogue);
+                }
+            }
+        }
+
+        public D_DialogueSO GetStartingDialogue(string dialogueName)
+        {
+            if (startingDialogues.ContainsKey(dialogueName) == false)
+            {
+                return null;
+            }
+            return startingDialogues[dialogueName];
+        }
     }
 }

@@ -13,5 +13,10 @@
 
 	--ds-colors-window-yellow: #FDD057;
 
+
+	--ds-colors-textfield-ko: #8A0F0F;
+	--ds-colors-textfield-ja: #187F0D;
+	--ds-colors-textfield-en: #0D777F;
+
 	--ds-metrics-grid-25: 25;
 }

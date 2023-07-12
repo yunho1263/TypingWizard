@@ -10,7 +10,7 @@ namespace DialogueSystem.Data.Save
         [field: SerializeField] public List<D_NodeSaveData> Nodes { get; set; }
         [field: SerializeField] public List<string> OldGroupNames { get; set; }
         [field: SerializeField] public List<string> OldUngroupedNodeNames { get; set; }
-        [field: SerializeField] public List<string> OldTexts { get; set; }
+        [field: SerializeField] public List<string> OldBranchNames { get; set; }
         [field: SerializeField] public SerializableDictionary<string, List<string>> OldGroupedNodeNames { get; set; }
 
 

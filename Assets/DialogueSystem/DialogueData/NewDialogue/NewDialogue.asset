@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556c7808b8840c44c85876925b8211ce, type: 3}
   m_Name: NewDialogue
   m_EditorClassIdentifier: 
-  <FileName>k__BackingField: 
+  <FileName>k__BackingField: NewDialogue
   <DialogueGroups>k__BackingField:
-    list: []
+    list:
+    - Key: {fileID: 11400000, guid: 01adc9c99db8bfe489d76bf96b081ebe, type: 2}
+      Value:
+      - {fileID: 11400000, guid: 8b5e8251c68b43741bd527d5c4d77a15, type: 2}
+    - Key: {fileID: 11400000, guid: b46cdf4c5b8fc284f9492ade6132377d, type: 2}
+      Value:
+      - {fileID: 11400000, guid: b1c0b35dc3ca81a4d9e85d0d1bbe5b46, type: 2}
+      - {fileID: 11400000, guid: 23e284e412bcab343a08958b3a3a8b72, type: 2}
   <UngroupedDialogues>k__BackingField: []

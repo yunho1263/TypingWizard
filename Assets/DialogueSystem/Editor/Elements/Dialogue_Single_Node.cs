@@ -18,7 +18,7 @@ namespace DialogueSystem.Elements
 
             D_BranchSaveData branchData = new D_BranchSaveData()
             {
-                Text = "Next Dialogue"
+                branchName = "NextDialogue"
             };
 
             Branchs.Add(branchData);
@@ -30,7 +30,7 @@ namespace DialogueSystem.Elements
             // 다음 대화
             foreach (D_BranchSaveData branch in Branchs)
             {
-                Port outputPort = this.CreatePort(branch.Text);
+                Port outputPort = this.CreatePort(branch.branchName);
 
                 outputPort.userData = branch;
 

@@ -29,7 +29,9 @@ namespace DialogueSystem.Elements
         public string Speaker { get; set; }
 
         // 대화 내용
-        public string Text { get; set; }
+        public string Ko_Text { get; set; }
+        public string Ja_Text { get; set; }
+        public string En_Text { get; set; }
         
         // 분기
         public List<D_BranchSaveData> Branchs { get; set; }
@@ -46,7 +48,9 @@ namespace DialogueSystem.Elements
             DialogueName = nodeName;
             Branchs = new List<D_BranchSaveData>();
             Speaker = "SpeakerName";
-            Text = "Sentence";
+            Ko_Text = "ko_Sentence";
+            Ja_Text = "ja_Sentence";
+            En_Text = "en_Sentence";
 
             graphView = d_GraphView;
             defalutBackgroundColor = new Color(29f/ 255f, 29f / 255f, 30f / 255f);
@@ -112,9 +116,9 @@ namespace DialogueSystem.Elements
             inputContainer.Add(inputPort);
 
             // 화자
-            VisualElement customDataContainer1 = new VisualElement();
-            customDataContainer1.AddToClassList("ds-node__custom-data-container");
-            Foldout textFoldout1 = D_ElementUtilitie.CreateFoldout("Dialogue Speaker");
+            VisualElement speakerDataContainer = new VisualElement();
+            speakerDataContainer.AddToClassList("ds-node__custom-data-container");
+            Foldout speakerFoldout = D_ElementUtilitie.CreateFoldout("Dialogue Speaker");
 
             TextField speakerTextField = D_ElementUtilitie.CreateTextField(Speaker, null, callback =>
             {
@@ -125,27 +129,57 @@ namespace DialogueSystem.Elements
                 "ds-node__textfield",
                 "ds-node__quote-textfield"
             );
-            textFoldout1.Add(speakerTextField);
-            customDataContainer1.Add(textFoldout1);
-            extensionContainer.Add(customDataContainer1);
+            speakerFoldout.Add(speakerTextField);
+            speakerDataContainer.Add(speakerFoldout);
+            extensionContainer.Add(speakerDataContainer);
 
             // 대화 내용
-            VisualElement customDataContainer2 = new VisualElement();
-            customDataContainer2.AddToClassList("ds-node__custom-data-container");
-            Foldout textFoldout2 = D_ElementUtilitie.CreateFoldout("Dialogue Text");
+            VisualElement textDataContainer = new VisualElement();
+            textDataContainer.AddToClassList("ds-node__custom-data-container");
+            Foldout textFoldout = D_ElementUtilitie.CreateFoldout("Dialogue Text");
 
-            TextField textTextField = D_ElementUtilitie.CreateTextArea(Text, null, callback =>
+            // ----------------------------------------------------------
+
+            TextField ko_textTextField = D_ElementUtilitie.CreateTextArea(Ko_Text, null, callback =>
             {
-                Text = callback.newValue;
+                Ko_Text = callback.newValue;
             });
-            textTextField.AddClasses
+            ko_textTextField.AddClasses
             (
                 "ds-node__textfield",
-                "ds-node__quote-textfield"
+                "ds-node__quote-textfield_ko"
             );
-            textFoldout2.Add(textTextField);
-            customDataContainer2.Add(textFoldout2);
-            extensionContainer.Add(customDataContainer2);
+            textFoldout.Add(ko_textTextField);
+            textDataContainer.Add(textFoldout);
+
+            TextField ja_textTextField = D_ElementUtilitie.CreateTextArea(Ja_Text, null, callback =>
+            {
+                Ja_Text = callback.newValue;
+            });
+            ja_textTextField.AddClasses
+            (
+                "ds-node__textfield",
+                "ds-node__quote-textfield_ja"
+            );
+            textFoldout.Add(ja_textTextField);
+            textDataContainer.Add(textFoldout);
+
+            TextField en_textTextField = D_ElementUtilitie.CreateTextArea(En_Text, null, callback =>
+            {
+                En_Text = callback.newValue;
+            });
+            en_textTextField.AddClasses
+            (
+                "ds-node__textfield",
+                "ds-node__quote-textfield_en"
+            );
+            textFoldout.Add(en_textTextField);
+            textDataContainer.Add(textFoldout);
+
+            //----------------------------------------------------------
+
+
+            extensionContainer.Add(textDataContainer);
 
             RefreshExpandedState();
         }

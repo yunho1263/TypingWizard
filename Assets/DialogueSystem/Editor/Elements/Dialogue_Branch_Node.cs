@@ -22,7 +22,10 @@ namespace DialogueSystem.Elements
             // 노드 타이틀 설정
             D_BranchSaveData branchData = new D_BranchSaveData()
             {
-                Text = "New Branch"
+                branchName = "NewBranchName",
+                Ko_Text = "koText",
+                Ja_Text = "jaText",
+                En_Text = "enText"
             };
 
             Branchs.Add(branchData);
@@ -38,7 +41,10 @@ namespace DialogueSystem.Elements
             {
                 D_BranchSaveData branchData = new D_BranchSaveData()
                 {
-                    Text = "New Branch"
+                    branchName = "NewBranchName",
+                    Ko_Text = "koText",
+                    Ja_Text = "jaText",
+                    En_Text = "enText"
                 };
 
                 Branchs.Add(branchData);
@@ -84,18 +90,66 @@ namespace DialogueSystem.Elements
             });
             DeleteBranchButton.AddToClassList("ds-node__button");
 
-            TextField branchTextField = D_ElementUtilitie.CreateTextField(branchData.Text, null, callback =>
+            TextField branchNameField = D_ElementUtilitie.CreateTextField(branchData.branchName, null, callback =>
             {
-                branchData.Text = callback.newValue;
+                branchData.branchName = callback.newValue;
             });
 
-            branchTextField.AddClasses
+            branchNameField.AddClasses
             (
                 "ds-node__textfield",
                 "ds-node__Branch-textfield",
                 "ds-node__textfield_hidden"
             );
-            outputPort.contentContainer.Add(branchTextField);
+            outputPort.contentContainer.Add(branchNameField);
+
+            //----------------------------------------------
+
+            TextField branch_Ko_Text_Field = D_ElementUtilitie.CreateTextField(branchData.Ko_Text, null, callback =>
+            {
+                branchData.Ko_Text = callback.newValue;
+            });
+
+            branch_Ko_Text_Field.AddClasses
+            (
+                "ds-node__textfield",
+                "ds-node__Branch-textfield_ko",
+                "ds-node__textfield_hidden"
+            );
+            outputPort.contentContainer.Add(branch_Ko_Text_Field);
+
+            //----------------------------------------------
+
+            TextField branch_Ja_Text_Field = D_ElementUtilitie.CreateTextField(branchData.Ja_Text, null, callback =>
+            {
+                branchData.Ja_Text = callback.newValue;
+            });
+
+            branch_Ja_Text_Field.AddClasses
+            (
+                "ds-node__textfield",
+                "ds-node__Branch-textfield_ja",
+                "ds-node__textfield_hidden"
+            );
+            outputPort.contentContainer.Add(branch_Ja_Text_Field);
+
+            //----------------------------------------------
+
+            TextField branch_En_Text_Field = D_ElementUtilitie.CreateTextField(branchData.En_Text, null, callback =>
+            {
+                branchData.En_Text = callback.newValue;
+            });
+
+            branch_En_Text_Field.AddClasses
+            (
+                "ds-node__textfield",
+                "ds-node__Branch-textfield_en",
+                "ds-node__textfield_hidden"
+            );
+            outputPort.contentContainer.Add(branch_En_Text_Field);
+
+            //----------------------------------------------
+
             outputPort.contentContainer.Add(DeleteBranchButton);
             return outputPort;
         }

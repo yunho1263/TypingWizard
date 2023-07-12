@@ -15,8 +15,24 @@ MonoBehaviour:
   m_TableCollectionName: DialogueText
   m_TableCollectionNameGuidString: 8151b509e959b82498edb59419c653c3
   m_Entries:
-  - m_Id: 28003119460352
-    m_Key: 'st_D: eeqwe'
+  - m_Id: 711507067072512
+    m_Key: 'st_D: NewDialogue - g1 - br'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711507096432640
+    m_Key: 'st_B: NewDialogue - g1 - br - b2'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711657541922816
+    m_Key: 'st_D: NewDialogue - g2 - dddasd'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711658921848832
+    m_Key: 'st_D: NewDialogue - g2 - dwwweqwe'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 711661513928704
+    m_Key: 'st_B: NewDialogue - g1 - br - NewBranchName'
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -26,6 +26,55 @@ MonoBehaviour:
     m_Localized: ccc
     m_Metadata:
       m_Items: []
+  - m_Id: 979875078664192
+    m_Localized: gggfd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979878123728896
+    m_Localized: ko_Sentence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979882510970880
+    m_Localized: frfrfdsdf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979882510970881
+    m_Localized: koText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979882485805056
+    m_Localized: asdasdasdasdasd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986348361936896
+    m_Localized: "\uC548\uB155?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986355798437889
+    m_Localized: "\uADF8\uB807\uB124"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986355798437890
+    m_Localized: "\uC544\uB2C8 \uBCC4\uB85C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986355798437888
+    m_Localized: "\uC624\uB298 \uB0A0\uC528 \uC88B\uB2E4 \uADF8\uCE58?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986358164025344
+    m_Localized: "\uC774\uB7F0\uB0A0\uC5D0\uB294 \uC5ED\uC2DC \uB0AE\uC220\uC774\uC9C0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986360022102016
+    m_Localized: "\uD760 \uB098\uB9CC \uADF8\uB807\uAC8C \uB290\uB07C\uB294\uAC74\uAC00"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986362337357824
+    m_Localized: "\uC544\uBB34\uD2BC \uB4E4\uC5B4\uBD10 \uC9C0\uAE08 \uC7A5\uB09C
+      \uC544\uB2C8\uC57C"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

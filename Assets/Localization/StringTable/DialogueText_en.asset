@@ -26,6 +26,54 @@ MonoBehaviour:
     m_Localized: xxx
     m_Metadata:
       m_Items: []
+  - m_Id: 979875078664192
+    m_Localized: gtgtg
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979878123728896
+    m_Localized: ja_Sentence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979882510970880
+    m_Localized: vvfrvrrf
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979882510970881
+    m_Localized: jaText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 979882485805056
+    m_Localized: ddd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986348361936896
+    m_Localized: Hi!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986355798437889
+    m_Localized: Yeah, that's great.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986355798437890
+    m_Localized: Not really
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986355798437888
+    m_Localized: It's a beautiful day, isn't it?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986358164025344
+    m_Localized: It's a daytime drink on a day like this.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986360022102016
+    m_Localized: Hmmm am I the only one who feels that way?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 986362337357824
+    m_Localized: Anyway, listen, I'm not kidding.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

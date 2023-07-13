@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using TypingWizard.Dialogue;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,7 +51,7 @@ namespace TypingWizard
         }
         #endregion
 
-        #region 이동 관련
+        #region 이동
         public void OnMove(InputValue value)
         {
             moveDirNomormal = Vector3.zero;
@@ -63,23 +64,25 @@ namespace TypingWizard
         }
         #endregion
 
-        #region 상호작용 관련
+        #region 상호작용
         public GameObject interactiveObject;
 
         public void OnInteractions()
         {
-            if (interactiveObject == null)
+            InteractiveObject Object;
+            if (interactiveObject == null || !interactiveObject.TryGetComponent(out Object))
             {
                 return;
             }
 
-            Debug.Log(interactiveObject.name);
+            Object.Interact();
         }
 
         public void FindInteractiveObjects()
         {
+            LayerMask hitLayers = (1 << LayerMask.NameToLayer("InteractiveObjects")) | (1 << LayerMask.NameToLayer("NPC"));
             // 범위 안에 있는 InteractiveObjects레이어인 오브젝트를 찾는다
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 3f, 1 << LayerMask.NameToLayer("InteractiveObjects"));
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 3f, hitLayers);
             if (colliders.Length == 0)
             {
                 interactiveObject = null;
@@ -88,7 +91,37 @@ namespace TypingWizard
             // 거리순으로 정렬한다
             colliders = colliders.OrderBy(x => Vector3.Distance(transform.position, x.transform.position)).ToArray();
             // 가장 가까운 오브젝트를 찾는다
-            interactiveObject = colliders[0].gameObject.transform.parent.gameObject;
+            interactiveObject = colliders[0].gameObject;
+        }
+        #endregion
+
+        #region 대화
+
+        public TMP_InputField dialogueInputField;
+
+        public void OpenDialogueInputField()
+        {
+            if (dialogueInputField == null)
+            {
+                dialogueInputField = DialogueManager.Instance.dialogueInputField;
+            }
+
+            dialogueInputField.gameObject.SetActive(true);
+            spellInputField.Select();
+            Input.imeCompositionMode = IMECompositionMode.On;
+        }
+
+        public void OnNextDialogue()
+        {
+            DialogueManager.Instance.NextDialogue();
+        }
+
+        public void OnAnswer()
+        {
+            if (dialogueInputField == null || dialogueInputField.text == "")
+            {
+                return;
+            }
         }
         #endregion
 

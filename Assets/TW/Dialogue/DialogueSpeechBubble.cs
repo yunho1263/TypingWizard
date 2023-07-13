@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace DialogueSystem
+namespace TypingWizard.Dialogue
 {
     public class DialogueSpeechBubble : MonoBehaviour
     {
-        public GameObject speaker;
+        public GameObject speakerObject;
+        public DialogueSpeaker speaker;
         public RectTransform speechBubble;
         public TMP_Text speechBubbleText;
         public string text;
 
         public Vector2 sizeDelta;
 
-        public void Display(GameObject speaker, string text)
+        public void Display(DialogueSpeaker speaker, string text)
         {
             speechBubble.gameObject.SetActive(true);
             SetDialog(speaker, text);
@@ -23,15 +24,16 @@ namespace DialogueSystem
         public void Close()
         {
             speechBubble.gameObject.SetActive(false);
-            speaker = null;
+            speakerObject = null;
             text = null;
             speechBubbleText.text = null;
         }
 
 
-        public void SetDialog(GameObject speaker, string text)
+        public void SetDialog(DialogueSpeaker speaker, string text)
         {
             this.speaker = speaker;
+            speakerObject = speaker.gameObject;
             this.text = text;
             speechBubbleText.text = this.text;
         }
@@ -39,7 +41,7 @@ namespace DialogueSystem
         public void SetPosition()
         {
             //speaker의 스크린 좌표를 구한다
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(speaker.transform.position);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(speakerObject.transform.position);
             //speechBubble의 위치를 speaker의 스크린 좌표로 설정한다
             speechBubble.position = screenPos + new Vector3(0, 100, 0);
         }
@@ -62,12 +64,11 @@ namespace DialogueSystem
 
         private void Update()
         {
-            if (speaker != null)
+            if (speakerObject != null)
             {
                 SetPosition();
                 UpdateScale();
             }
         }
     }
-
 }

@@ -741,6 +741,9 @@ namespace DialogueSystem.Utilities
 
             StringTable ja_Table = tableCol.GetTable("ja") as StringTable;
             jaText = ja_Table.GetEntry(key).Value;
+
+            EditorUtility.SetDirty(tableCol);
+            EditorUtility.SetDirty(tableCol.SharedData);
         }
 
         private static string CreateNodesLocalizedTextKey(string fileName, string NodeName)

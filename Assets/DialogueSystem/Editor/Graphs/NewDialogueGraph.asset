@@ -13,84 +13,109 @@ MonoBehaviour:
   m_Name: NewDialogueGraph
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: NewDialogue
-  <Groups>k__BackingField:
-  - <ID>k__BackingField: b4d6bae9-4b3b-4f36-9b77-1d115a171748
-    <Name>k__BackingField: g1
-    <Position>k__BackingField: {x: 171.99998, y: 62.99999}
-  - <ID>k__BackingField: 764cc434-e72d-4b87-a72e-6599da9291d6
-    <Name>k__BackingField: g2
-    <Position>k__BackingField: {x: 839.00006, y: 103.99999}
+  <Groups>k__BackingField: []
   <Nodes>k__BackingField:
-  - <ID>k__BackingField: 8c0e3eca-fcb9-4131-a52e-a0f7422afec2
-    <Name>k__BackingField: dddasd
-    <Speaker>k__BackingField: SpeakerName
-    <Ko_Text>k__BackingField: gggfd
-    <Ja_Text>k__BackingField: gtgtg
-    <En_Text>k__BackingField: lklklk
-    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - g2 - dddasd'
+  - <ID>k__BackingField: 84658242-347f-4552-9083-b71d9e72227d
+    <Name>k__BackingField: D1
+    <Speaker>k__BackingField: testNpc
+    <Ko_Text>k__BackingField: "\uC548\uB155?"
+    <Ja_Text>k__BackingField: "\u3053\u3093\u306B\u3061\u306F"
+    <En_Text>k__BackingField: Hi!
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D1'
     <Branchs>k__BackingField:
     - <branchName>k__BackingField: NextDialogue
       <Ko_Text>k__BackingField: 
       <Ja_Text>k__BackingField: 
       <En_Text>k__BackingField: 
       <LocalizedTextKey>k__BackingField: 
-      <NodeId>k__BackingField: 
-    <GroupID>k__BackingField: 764cc434-e72d-4b87-a72e-6599da9291d6
+      <NodeId>k__BackingField: 06372d37-0bcb-4dce-8005-b150d0653b83
+    <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 864, y: 163}
-  - <ID>k__BackingField: e49cb38e-207a-410e-895a-4ee0f1a91f54
-    <Name>k__BackingField: dwwweqwe
-    <Speaker>k__BackingField: SpeakerName
-    <Ko_Text>k__BackingField: ko_Sentence
-    <Ja_Text>k__BackingField: ja_Sentence
-    <En_Text>k__BackingField: en_Sentence
-    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - g2 - dwwweqwe'
+    <Position>k__BackingField: {x: 295, y: 269}
+  - <ID>k__BackingField: 06372d37-0bcb-4dce-8005-b150d0653b83
+    <Name>k__BackingField: B1
+    <Speaker>k__BackingField: testNpc
+    <Ko_Text>k__BackingField: "\uC624\uB298 \uB0A0\uC528 \uC88B\uB2E4 \uADF8\uCE58?"
+    <Ja_Text>k__BackingField: "\u4ECA\u65E5\u306E\u5929\u6C17\u3044\u3044\u3088\u306D\uFF1F"
+    <En_Text>k__BackingField: It's a beautiful day, isn't it?
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - B1'
     <Branchs>k__BackingField:
-    - <branchName>k__BackingField: NextDialogue
-      <Ko_Text>k__BackingField: 
-      <Ja_Text>k__BackingField: 
-      <En_Text>k__BackingField: 
-      <LocalizedTextKey>k__BackingField: 
-      <NodeId>k__BackingField: 
-    <GroupID>k__BackingField: 764cc434-e72d-4b87-a72e-6599da9291d6
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 882, y: 574}
-  - <ID>k__BackingField: e95b9b30-a997-48f8-8e01-af838af447e5
-    <Name>k__BackingField: br
-    <Speaker>k__BackingField: SpeakerName
-    <Ko_Text>k__BackingField: asdasdasdasdasd
-    <Ja_Text>k__BackingField: ddd
-    <En_Text>k__BackingField: aaa
-    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - g1 - br'
-    <Branchs>k__BackingField:
-    - <branchName>k__BackingField: b2
-      <Ko_Text>k__BackingField: frfrfdsdf
-      <Ja_Text>k__BackingField: vvfrvrrf
-      <En_Text>k__BackingField: rgrtgfsdf
-      <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - g1 - br - b2'
-      <NodeId>k__BackingField: 8c0e3eca-fcb9-4131-a52e-a0f7422afec2
-    - <branchName>k__BackingField: NewBranchName
-      <Ko_Text>k__BackingField: koText
-      <Ja_Text>k__BackingField: jaText
-      <En_Text>k__BackingField: enText
-      <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - g1 - br - NewBranchName'
-      <NodeId>k__BackingField: e49cb38e-207a-410e-895a-4ee0f1a91f54
-    <GroupID>k__BackingField: b4d6bae9-4b3b-4f36-9b77-1d115a171748
+    - <branchName>k__BackingField: C1
+      <Ko_Text>k__BackingField: "\uADF8\uB807\uB124"
+      <Ja_Text>k__BackingField: "\u305D\u3046\u306A\u3093\u3067\u3059\u306D\u3001\u3044\u3044\u3067\u3059\u306D"
+      <En_Text>k__BackingField: Yeah, that's great.
+      <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - B1 - C1'
+      <NodeId>k__BackingField: e29c9303-3b5a-44ff-b80c-dcf09784f820
+    - <branchName>k__BackingField: C2
+      <Ko_Text>k__BackingField: "\uC544\uB2C8 \uBCC4\uB85C"
+      <Ja_Text>k__BackingField: "\u3044\u3084\u3001\u3042\u307E\u308A"
+      <En_Text>k__BackingField: Not really
+      <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - B1 - C2'
+      <NodeId>k__BackingField: 63016de3-5326-4389-82f3-1b8a1ad8b2c4
+    <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 1
-    <Position>k__BackingField: {x: 197, y: 122}
-  <OldGroupNames>k__BackingField:
-  - g1
-  - g2
-  <OldUngroupedNodeNames>k__BackingField: []
+    <Position>k__BackingField: {x: 625, y: 226}
+  - <ID>k__BackingField: e29c9303-3b5a-44ff-b80c-dcf09784f820
+    <Name>k__BackingField: D2
+    <Speaker>k__BackingField: TestNpc
+    <Ko_Text>k__BackingField: "\uC774\uB7F0\uB0A0\uC5D0\uB294 \uC5ED\uC2DC \uB0AE\uC220\uC774\uC9C0"
+    <Ja_Text>k__BackingField: "\u3053\u3093\u306A\u65E5\u306F\u3084\u3063\u3071\u308A\u663C\u9152\u3067\u3059\u306D"
+    <En_Text>k__BackingField: It's a daytime drink on a day like this.
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D2'
+    <Branchs>k__BackingField:
+    - <branchName>k__BackingField: NextDialogue
+      <Ko_Text>k__BackingField: 
+      <Ja_Text>k__BackingField: 
+      <En_Text>k__BackingField: 
+      <LocalizedTextKey>k__BackingField: 
+      <NodeId>k__BackingField: a11b29b8-db60-4d77-ae21-a5edd3175bfb
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1322, y: -77}
+  - <ID>k__BackingField: 63016de3-5326-4389-82f3-1b8a1ad8b2c4
+    <Name>k__BackingField: D3
+    <Speaker>k__BackingField: TestNpc
+    <Ko_Text>k__BackingField: "\uD760 \uB098\uB9CC \uADF8\uB807\uAC8C \uB290\uB07C\uB294\uAC74\uAC00"
+    <Ja_Text>k__BackingField: "\u3046\u30FC\u3093\u3001\u305D\u3046\u611F\u3058\u308B\u306E\u306F\u79C1\u3060\u3051\uFF1F"
+    <En_Text>k__BackingField: Hmmm am I the only one who feels that way?
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D3'
+    <Branchs>k__BackingField:
+    - <branchName>k__BackingField: NextDialogue
+      <Ko_Text>k__BackingField: 
+      <Ja_Text>k__BackingField: 
+      <En_Text>k__BackingField: 
+      <LocalizedTextKey>k__BackingField: 
+      <NodeId>k__BackingField: a11b29b8-db60-4d77-ae21-a5edd3175bfb
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1341, y: 409}
+  - <ID>k__BackingField: a11b29b8-db60-4d77-ae21-a5edd3175bfb
+    <Name>k__BackingField: D4
+    <Speaker>k__BackingField: Testnpc
+    <Ko_Text>k__BackingField: "\uC544\uBB34\uD2BC \uB4E4\uC5B4\uBD10 \uC9C0\uAE08
+      \uC7A5\uB09C \uC544\uB2C8\uC57C"
+    <Ja_Text>k__BackingField: "\u3068\u306B\u304B\u304F\u805E\u3044\u3066\u304F\u308C\u3088\u3001\u4ECA\u5197\u8AC7\u3058\u3083\u306A\u3044"
+    <En_Text>k__BackingField: Anyway, listen, I'm not kidding.
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D4'
+    <Branchs>k__BackingField:
+    - <branchName>k__BackingField: NextDialogue
+      <Ko_Text>k__BackingField: 
+      <Ja_Text>k__BackingField: 
+      <En_Text>k__BackingField: 
+      <LocalizedTextKey>k__BackingField: 
+      <NodeId>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 2054, y: 226}
+  <OldGroupNames>k__BackingField: []
+  <OldUngroupedNodeNames>k__BackingField:
+  - D1
+  - B1
+  - D2
+  - D3
+  - D4
   <OldBranchNames>k__BackingField:
-  - 'st_B: NewDialogue - g1 - br - b2'
-  - 'st_B: NewDialogue - g1 - br - NewBranchName'
+  - 'st_B: NewDialogue - B1 - C1'
+  - 'st_B: NewDialogue - B1 - C2'
   <OldGroupedNodeNames>k__BackingField:
-    list:
-    - Key: g2
-      Value:
-      - dddasd
-      - dwwweqwe
-    - Key: g1
-      Value:
-      - br
+    list: []

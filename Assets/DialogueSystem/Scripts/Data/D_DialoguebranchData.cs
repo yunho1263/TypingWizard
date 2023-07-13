@@ -39,6 +39,9 @@ namespace DialogueSystem.Data
 
             EditorUtility.SetDirty(tableCol);
             EditorUtility.SetDirty(tableCol.SharedData);
+            EditorUtility.SetDirty(ko_Table);
+            EditorUtility.SetDirty(ja_Table);
+            EditorUtility.SetDirty(en_Table);
         }
     }
 }

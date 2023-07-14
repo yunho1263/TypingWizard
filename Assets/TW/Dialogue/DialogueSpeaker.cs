@@ -11,6 +11,17 @@ namespace TypingWizard.Dialogue
         public D_Dialogue dialogue;
         public D_DialogueSO dialogueSO;
 
+
+        private void Start()
+        {
+            DialogueManager.Instance.AddSpeaker(this);
+        }
+
+        private void OnDestroy()
+        {
+            DialogueManager.Instance.RemoveSpeaker(this);
+        }
+
         public override void Interact()
         {
             DialogueManager.Instance.SetDialogue(dialogueSO);

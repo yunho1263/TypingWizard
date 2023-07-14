@@ -5,10 +5,12 @@ using UnityEngine;
 
 namespace TypingWizard.Dialogue
 {
-    using DialogueSystem;
     using DialogueSystem.ScrObj;
     using DialogueSystem.Enums;
     using TMPro;
+    using Unity.Properties;
+    using DialogueSystem.Data;
+    using System;
 
     public class DialogueManager : MonoBehaviour
     {
@@ -17,11 +19,7 @@ namespace TypingWizard.Dialogue
         {
             get
             {
-                if (instance != null)
-                {
-                    return instance;
-                }
-                else return instance = new DialogueManager();
+                return instance;
             }
         }
 
@@ -43,17 +41,27 @@ namespace TypingWizard.Dialogue
 
         public bool isDialoguePlaying = false;
 
-        private DialogueManager()
+        private void Awake()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+
             bubbleObjectPool = new List<GameObject>();
             UsingBubbleQueue = new Queue<DialogueSpeechBubble>();
             UnUsingBubbleQueue = new Queue<DialogueSpeechBubble>();
             speakers = new Dictionary<string, DialogueSpeaker>();
-            bubblePrefeb = Resources.Load<GameObject>("TW/Dialogue/Prefebs/DialogSpeechBubble");
+            bubblePrefeb = Resources.Load<GameObject>("Prefebs/DialogSpeechBubble");
             CreateBubble(5);
 
-            GameObject inputFieldPrefeb = Resources.Load<GameObject>("TW/Dialogue/Prefebs/DialogueInputField");
-            dialogueInputFieldObj = Instantiate(inputFieldPrefeb);
+            GameObject inputFieldPrefeb = Resources.Load<GameObject>("Prefebs/DialogueInputField");
+            dialogueInputFieldObj = Instantiate(inputFieldPrefeb, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+            dialogueInputFieldObj.SetActive(false);
             dialogueInputField = dialogueInputFieldObj.transform.GetChild(0).GetComponent<TMP_InputField>();
         }
 
@@ -98,8 +106,6 @@ namespace TypingWizard.Dialogue
 
         public DialogueResult NextDialogue()
         {
-            CloseSpeechBubble();
-
             if (currentDialogue == null)
             {
                 return DialogueResult.None;
@@ -116,10 +122,28 @@ namespace TypingWizard.Dialogue
                 return DialogueResult.Branch;
             }
 
-            D_DialogueSO nextDialogue = currentDialogue.Branchs[0].NextDialogue;
+            CloseSpeechBubble();
 
-            currentDialogue = nextDialogue;
+            currentDialogue = currentDialogue.Branchs[0].NextDialogue;
 
+            return DialogueResult.Next;
+        }
+
+        public DialogueResult ReceiveAnswers(string answer)
+        {
+            foreach (D_DialoguebranchData branch in currentDialogue.Branchs)
+            {
+                if (string.Equals(branch.LocalizedText.GetLocalizedString(), answer))
+                {
+                    CloseSpeechBubble();
+
+                    currentDialogue = branch.NextDialogue;
+
+                    return DialogueResult.Next;
+                }
+            }
+
+            currentDialogue = currentDialogue.Branchs[currentDialogue.Branchs.Count - 1].NextDialogue;
             return DialogueResult.Next;
         }
 
@@ -135,6 +159,11 @@ namespace TypingWizard.Dialogue
         public GameObject dialogueInputFieldObj;
         public TMP_InputField dialogueInputField;
 
+        public void DisplayDialogueInputField()
+        {
+            dialogueInputFieldObj.SetActive(true);
+        }
+
         #endregion
 
         #region 말풍선 컨트롤
@@ -149,7 +178,8 @@ namespace TypingWizard.Dialogue
         {
             for (int i = 0; i < quantity; i++)
             {
-                GameObject newBubbleObject = Instantiate(bubblePrefeb);
+                GameObject newBubbleObject = Instantiate(bubblePrefeb, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+                newBubbleObject.SetActive(false);
                 bubbleObjectPool.Add(newBubbleObject);
                 UnUsingBubbleQueue.Enqueue(newBubbleObject.GetComponent<DialogueSpeechBubble>());
             }

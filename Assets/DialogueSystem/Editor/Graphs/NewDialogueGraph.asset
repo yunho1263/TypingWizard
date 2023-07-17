@@ -55,26 +55,9 @@ MonoBehaviour:
     <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 1
     <Position>k__BackingField: {x: 625, y: 226}
-  - <ID>k__BackingField: e29c9303-3b5a-44ff-b80c-dcf09784f820
-    <Name>k__BackingField: D2
-    <Speaker>k__BackingField: TestNpc
-    <Ko_Text>k__BackingField: "\uC774\uB7F0\uB0A0\uC5D0\uB294 \uC5ED\uC2DC \uB0AE\uC220\uC774\uC9C0"
-    <Ja_Text>k__BackingField: "\u3053\u3093\u306A\u65E5\u306F\u3084\u3063\u3071\u308A\u663C\u9152\u3067\u3059\u306D"
-    <En_Text>k__BackingField: It's a daytime drink on a day like this.
-    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D2'
-    <Branchs>k__BackingField:
-    - <branchName>k__BackingField: NextDialogue
-      <Ko_Text>k__BackingField: 
-      <Ja_Text>k__BackingField: 
-      <En_Text>k__BackingField: 
-      <LocalizedTextKey>k__BackingField: 
-      <NodeId>k__BackingField: a11b29b8-db60-4d77-ae21-a5edd3175bfb
-    <GroupID>k__BackingField: 
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1322, y: -77}
   - <ID>k__BackingField: 63016de3-5326-4389-82f3-1b8a1ad8b2c4
     <Name>k__BackingField: D3
-    <Speaker>k__BackingField: TestNpc
+    <Speaker>k__BackingField: testNpc
     <Ko_Text>k__BackingField: "\uD760 \uB098\uB9CC \uADF8\uB807\uAC8C \uB290\uB07C\uB294\uAC74\uAC00"
     <Ja_Text>k__BackingField: "\u3046\u30FC\u3093\u3001\u305D\u3046\u611F\u3058\u308B\u306E\u306F\u79C1\u3060\u3051\uFF1F"
     <En_Text>k__BackingField: Hmmm am I the only one who feels that way?
@@ -85,18 +68,17 @@ MonoBehaviour:
       <Ja_Text>k__BackingField: 
       <En_Text>k__BackingField: 
       <LocalizedTextKey>k__BackingField: 
-      <NodeId>k__BackingField: a11b29b8-db60-4d77-ae21-a5edd3175bfb
+      <NodeId>k__BackingField: 
     <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 0
     <Position>k__BackingField: {x: 1341, y: 409}
-  - <ID>k__BackingField: a11b29b8-db60-4d77-ae21-a5edd3175bfb
-    <Name>k__BackingField: D4
-    <Speaker>k__BackingField: Testnpc
-    <Ko_Text>k__BackingField: "\uC544\uBB34\uD2BC \uB4E4\uC5B4\uBD10 \uC9C0\uAE08
-      \uC7A5\uB09C \uC544\uB2C8\uC57C"
-    <Ja_Text>k__BackingField: "\u3068\u306B\u304B\u304F\u805E\u3044\u3066\u304F\u308C\u3088\u3001\u4ECA\u5197\u8AC7\u3058\u3083\u306A\u3044"
-    <En_Text>k__BackingField: Anyway, listen, I'm not kidding.
-    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D4'
+  - <ID>k__BackingField: e29c9303-3b5a-44ff-b80c-dcf09784f820
+    <Name>k__BackingField: D2
+    <Speaker>k__BackingField: testNpc
+    <Ko_Text>k__BackingField: "\uC774\uB7F0\uB0A0\uC5D0\uB294 \uC5ED\uC2DC \uB0AE\uC220\uC774\uC9C0"
+    <Ja_Text>k__BackingField: "\u3053\u3093\u306A\u65E5\u306F\u3084\u3063\u3071\u308A\u663C\u9152\u3067\u3059\u306D"
+    <En_Text>k__BackingField: It's a daytime drink on a day like this.
+    <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D2'
     <Branchs>k__BackingField:
     - <branchName>k__BackingField: NextDialogue
       <Ko_Text>k__BackingField: 
@@ -106,14 +88,13 @@ MonoBehaviour:
       <NodeId>k__BackingField: 
     <GroupID>k__BackingField: 
     <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 2054, y: 226}
+    <Position>k__BackingField: {x: 1322, y: -77}
   <OldGroupNames>k__BackingField: []
   <OldUngroupedNodeNames>k__BackingField:
   - D1
   - B1
-  - D2
   - D3
-  - D4
+  - D2
   <OldBranchNames>k__BackingField:
   - 'st_B: NewDialogue - B1 - C1'
   - 'st_B: NewDialogue - B1 - C2'

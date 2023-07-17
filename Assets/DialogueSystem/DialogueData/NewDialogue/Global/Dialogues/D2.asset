@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DialogueName>k__BackingField: D2
   <GroupName>k__BackingField: 
-  <Speaker>k__BackingField: TestNpc
+  <Speaker>k__BackingField: testNpc
   <Ko_Text>k__BackingField: "\uC774\uB7F0\uB0A0\uC5D0\uB294 \uC5ED\uC2DC \uB0AE\uC220\uC774\uC9C0"
   <Ja_Text>k__BackingField: "\u3053\u3093\u306A\u65E5\u306F\u3084\u3063\u3071\u308A\u663C\u9152\u3067\u3059\u306D"
   <En_Text>k__BackingField: It's a daytime drink on a day like this.
@@ -43,7 +43,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 4d732d483632d5c4e804eb44881b2a04, type: 2}
+    <NextDialogue>k__BackingField: {fileID: 0}
   <NodeType>k__BackingField: 0
   <IsStartingDialogue>k__BackingField: 0
   references:

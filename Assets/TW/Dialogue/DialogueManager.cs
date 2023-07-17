@@ -11,6 +11,7 @@ namespace TypingWizard.Dialogue
     using Unity.Properties;
     using DialogueSystem.Data;
     using System;
+    using Febucci.UI;
 
     public class DialogueManager : MonoBehaviour
     {
@@ -59,10 +60,12 @@ namespace TypingWizard.Dialogue
             bubblePrefeb = Resources.Load<GameObject>("Prefebs/DialogSpeechBubble");
             CreateBubble(5);
 
-            GameObject inputFieldPrefeb = Resources.Load<GameObject>("Prefebs/DialogueInputField");
+            inputFieldPrefeb = Resources.Load<GameObject>("Prefebs/DialogueInputField");
             dialogueInputFieldObj = Instantiate(inputFieldPrefeb, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
             dialogueInputFieldObj.SetActive(false);
             dialogueInputField = dialogueInputFieldObj.transform.GetChild(0).GetComponent<TMP_InputField>();
+
+            UnfinishedShowingCount = 0;
         }
 
         private void OnDestroy()
@@ -70,6 +73,11 @@ namespace TypingWizard.Dialogue
             if (bubblePrefeb != null)
             {
                 bubblePrefeb = null;
+            }
+
+            if (inputFieldPrefeb != null)
+            {
+                inputFieldPrefeb = null;
             }
 
             Resources.UnloadUnusedAssets();
@@ -100,25 +108,30 @@ namespace TypingWizard.Dialogue
         {
             if(currentDialogue != null)
             {
+                UnfinishedShowingCount++;
                 DisplaySpeechBubble(currentDialogue.Speaker, currentDialogue.LocalizedText.GetLocalizedString());
             }
         }
 
         public DialogueResult NextDialogue()
         {
-            if (currentDialogue == null)
+            if (currentDialogue == null || UnfinishedShowingCount > 0)
             {
                 return DialogueResult.None;
             }
 
-            if (currentDialogue.Branchs == null || currentDialogue.Branchs.Count == 0)
+            if (currentDialogue.Branchs[0].NextDialogue == null)
             {
+                CloseSpeechBubble();
+                isDialoguePlaying = false;
                 currentDialogue = null;
+                Player.instance.playerInput.SwitchCurrentActionMap("Player");
                 return DialogueResult.End;
             }
 
             if (currentDialogue.NodeType == DialogueNodeType.Branch)
             {
+                DisplayDialogueInputField();
                 return DialogueResult.Branch;
             }
 
@@ -126,26 +139,11 @@ namespace TypingWizard.Dialogue
 
             currentDialogue = currentDialogue.Branchs[0].NextDialogue;
 
+            DisplayDialogue();
+
             return DialogueResult.Next;
         }
-
-        public DialogueResult ReceiveAnswers(string answer)
-        {
-            foreach (D_DialoguebranchData branch in currentDialogue.Branchs)
-            {
-                if (string.Equals(branch.LocalizedText.GetLocalizedString(), answer))
-                {
-                    CloseSpeechBubble();
-
-                    currentDialogue = branch.NextDialogue;
-
-                    return DialogueResult.Next;
-                }
-            }
-
-            currentDialogue = currentDialogue.Branchs[currentDialogue.Branchs.Count - 1].NextDialogue;
-            return DialogueResult.Next;
-        }
+        
 
         public void EndDialogue()
         {
@@ -156,12 +154,43 @@ namespace TypingWizard.Dialogue
         #region 플레이어 입력 컨트롤
 
         // 플레이어 입력 필드
+        GameObject inputFieldPrefeb;
         public GameObject dialogueInputFieldObj;
         public TMP_InputField dialogueInputField;
 
+        private int UnfinishedShowingCount;
+
+        public void finishedShowing()
+        {
+            UnfinishedShowingCount--;
+        }
+
         public void DisplayDialogueInputField()
         {
+            Player.instance.playerInput.SwitchCurrentActionMap("TextInput");
             dialogueInputFieldObj.SetActive(true);
+            dialogueInputField.Select();
+        }
+
+        public DialogueResult ReceiveAnswers(string answer)
+        {
+            CloseSpeechBubble();
+            dialogueInputFieldObj.SetActive(false);
+            Player.instance.playerInput.SwitchCurrentActionMap("Dialogue");
+
+            foreach (D_DialoguebranchData branch in currentDialogue.Branchs)
+            {
+                if (string.Equals(branch.LocalizedText.GetLocalizedString(), answer))
+                {
+                    currentDialogue = branch.NextDialogue;
+                    DisplayDialogue();
+                    return DialogueResult.Next;
+                }
+            }
+
+            currentDialogue = currentDialogue.Branchs[currentDialogue.Branchs.Count - 1].NextDialogue;
+            DisplayDialogue();
+            return DialogueResult.Next;
         }
 
         #endregion
@@ -181,7 +210,10 @@ namespace TypingWizard.Dialogue
                 GameObject newBubbleObject = Instantiate(bubblePrefeb, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
                 newBubbleObject.SetActive(false);
                 bubbleObjectPool.Add(newBubbleObject);
-                UnUsingBubbleQueue.Enqueue(newBubbleObject.GetComponent<DialogueSpeechBubble>());
+                DialogueSpeechBubble speechBubble = newBubbleObject.GetComponent<DialogueSpeechBubble>();
+                UnUsingBubbleQueue.Enqueue(speechBubble);
+
+                speechBubble.speechBubbleText.GetComponent<TypewriterByCharacter>().onTextShowed.AddListener(finishedShowing);
             }
         }
 

@@ -103,8 +103,8 @@ namespace TypingWizard.UI
         public void ResetField()
         {
             Player.instance.playerInput.currentActionMap = Player.instance.playerInput.actions.FindActionMap("Player");
-            inputField.gameObject.SetActive(false);
             inputField.text = "";
+            inputField.gameObject.SetActive(false);
         }
     }
 

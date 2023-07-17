@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DialogueName>k__BackingField: D3
   <GroupName>k__BackingField: 
-  <Speaker>k__BackingField: TestNpc
+  <Speaker>k__BackingField: testNpc
   <Ko_Text>k__BackingField: "\uD760 \uB098\uB9CC \uADF8\uB807\uAC8C \uB290\uB07C\uB294\uAC74\uAC00"
   <Ja_Text>k__BackingField: "\u3046\u30FC\u3093\u3001\u305D\u3046\u611F\u3058\u308B\u306E\u306F\u79C1\u3060\u3051\uFF1F"
   <En_Text>k__BackingField: Hmmm am I the only one who feels that way?
@@ -43,7 +43,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    <NextDialogue>k__BackingField: {fileID: 11400000, guid: 4d732d483632d5c4e804eb44881b2a04, type: 2}
+    <NextDialogue>k__BackingField: {fileID: 0}
   <NodeType>k__BackingField: 0
   <IsStartingDialogue>k__BackingField: 0
   references:

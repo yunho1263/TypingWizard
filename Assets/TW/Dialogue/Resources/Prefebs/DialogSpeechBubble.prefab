@@ -171,6 +171,7 @@ MonoBehaviour:
   speaker: {fileID: 0}
   speechBubble: {fileID: 6465282169409415609}
   speechBubbleText: {fileID: 6719422560940783878}
+  typewriter: {fileID: 2723668083161571977}
   text: 
   sizeDelta: {x: 0, y: 0}
 --- !u!1 &8062888057792992268
@@ -185,6 +186,7 @@ GameObject:
   - component: {fileID: 1792747004090503208}
   - component: {fileID: 6719422560940783878}
   - component: {fileID: 6394488003858473135}
+  - component: {fileID: 2723668083161571977}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -338,3 +340,45 @@ MonoBehaviour:
   - fade
   defaultBehaviorsTags: []
   defaultTagsMode: 0
+--- !u!114 &2723668083161571977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062888057792992268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a6945b90dcd0c4b81619c0d8b5c283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTypeWriter: 1
+  startTypewriterMode: 3
+  hideAppearancesOnSkip: 0
+  triggerEventsOnSkip: 0
+  resetTypingSpeedAtStartup: 1
+  disappearanceOrientation: 0
+  onTextShowed:
+    m_PersistentCalls:
+      m_Calls: []
+  onTypewriterStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onTextDisappeared:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacterVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  onMessage:
+    m_PersistentCalls:
+      m_Calls: []
+  waitForNormalChars: 0.05
+  waitLong: 0.6
+  waitMiddle: 0.2
+  avoidMultiplePunctuactionWait: 0
+  waitForNewLines: 1
+  waitForLastCharacter: 1
+  useTypewriterWaitForDisappearances: 1
+  disappearanceWaitTime: 0.015
+  disappearanceSpeedMultiplier: 1

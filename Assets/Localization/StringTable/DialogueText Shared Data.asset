@@ -51,10 +51,6 @@ MonoBehaviour:
     m_Key: 'st_D: NewDialogue - D3'
     m_Metadata:
       m_Items: []
-  - m_Id: 986362337357824
-    m_Key: 'st_D: NewDialogue - D4'
-    m_Metadata:
-      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

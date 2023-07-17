@@ -1,3 +1,4 @@
+using Febucci.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ namespace TypingWizard.Dialogue
         public DialogueSpeaker speaker;
         public RectTransform speechBubble;
         public TMP_Text speechBubbleText;
+        public TypewriterByCharacter typewriter;
         public string text;
 
         public Vector2 sizeDelta;
@@ -35,7 +37,7 @@ namespace TypingWizard.Dialogue
             this.speaker = speaker;
             speakerObject = speaker.gameObject;
             this.text = text;
-            speechBubbleText.text = this.text;
+            typewriter.ShowText(text);
         }
 
         public void SetPosition()

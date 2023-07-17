@@ -19,7 +19,10 @@ namespace TypingWizard.Dialogue
 
         private void OnDestroy()
         {
-            DialogueManager.Instance.RemoveSpeaker(this);
+            if (DialogueManager.Instance != null)
+            {
+                DialogueManager.Instance.RemoveSpeaker(this);
+            }
         }
 
         public override void Interact()

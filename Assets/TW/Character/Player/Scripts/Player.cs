@@ -39,7 +39,7 @@ namespace TypingWizard
 
         public void OnInputModeChanges() // 주문 입력 필드 활성화
         {
-            playerInput.SwitchCurrentActionMap("MagicSpell");
+            playerInput.SwitchCurrentActionMap("TextInput");
             spellInputField.gameObject.SetActive(true);
             spellInputField.Select();
             Input.imeCompositionMode = IMECompositionMode.On;
@@ -114,14 +114,6 @@ namespace TypingWizard
         public void OnNextDialogue()
         {
             DialogueManager.Instance.NextDialogue();
-        }
-
-        public void OnAnswer()
-        {
-            if (dialogueInputField == null || dialogueInputField.text == "")
-            {
-                return;
-            }
         }
         #endregion
 

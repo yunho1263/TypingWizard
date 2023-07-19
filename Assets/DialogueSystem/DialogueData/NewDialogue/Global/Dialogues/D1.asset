@@ -16,8 +16,8 @@ MonoBehaviour:
   <GroupName>k__BackingField: 
   <Speaker>k__BackingField: testNpc
   <Ko_Text>k__BackingField: "\uC548\uB155?"
-  <Ja_Text>k__BackingField: "\u3053\u3093\u306B\u3061\u306F"
-  <En_Text>k__BackingField: Hi!
+  <Ja_Text>k__BackingField: Hi!
+  <En_Text>k__BackingField: "\u3053\u3093\u306B\u3061\u306F"
   <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D1'
   <LocalizedText>k__BackingField:
     m_TableReference:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 
-namespace TypingWizard
+namespace TypingWizard.Damages
 {
     [CreateAssetMenu(fileName = "DamegaScrObj", menuName = "Scriptable Object/Damage")]
     public class DamageScrObj : ScriptableObject

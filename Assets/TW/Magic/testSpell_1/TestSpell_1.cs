@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace TypingWizard
+namespace TypingWizard.Spells
 {
+    using Enums;
+    using Damages;
+
     public class TestSpell_1 : Spell
     {
         public int maxProjectileCount;
@@ -38,7 +41,7 @@ namespace TypingWizard
                 if (!projectiles[i].isUsing)
                 {
                     projectiles[i].gameObject.SetActive(true);
-                    ValueDictionaryEntry Entry = values.FirstOrDefault(item => item.key.Equals(ValueType.Damage));
+                    SpellValueDictionaryEntry Entry = values.FirstOrDefault(item => item.key.Equals(ValueType.Damage));
                     projectiles[i].Shoot(this, damage, 5f, 10f, Vector3.forward);
                     break;
                 }

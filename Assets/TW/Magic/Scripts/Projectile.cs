@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace TypingWizard
+namespace TypingWizard.Spells
 {
+    using Damages;
     public class Projectile : MonoBehaviour
     {
         public Vector3 normalDir;

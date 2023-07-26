@@ -5,6 +5,8 @@ using System;
 
 namespace TypingWizard
 {
+    using Spells;
+
     [Serializable]
     public class SpellNode
     {
@@ -65,16 +67,16 @@ namespace TypingWizard
                 i++;
             }
             //배열을 정렬한다.
-            Array.Sort(nodes, delegate (SpellNode x, SpellNode y)
-            {
-                Spell xSpell;
-                x.spellObj.TryGetComponent(out xSpell);
+            //Array.Sort(nodes, delegate (SpellNode x, SpellNode y)
+            //{
+            //    Spell xSpell;
+            //    x.spellObj.TryGetComponent(out xSpell);
 
-                Spell ySpell;
-                y.spellObj.TryGetComponent(out ySpell);
+            //    Spell ySpell;
+            //    y.spellObj.TryGetComponent(out ySpell);
 
-                return xSpell.arias[0].CompareTo(ySpell.arias[0]);
-            });
+            //    return xSpell.arias[0].CompareTo(ySpell.arias[0]);
+            //});
             //배열을 다시 트리로 만든다.
             root = nodes[0];
             for (int j = 1; j < nodes.Length; j++)
@@ -95,34 +97,34 @@ namespace TypingWizard
                 Spell currSpell;
                 current.spellObj.TryGetComponent(out currSpell);
 
-                if (newSpell.arias[0].CompareTo(currSpell.arias[0]) < 0)
-                {
-                    if (current.left == null) // 왼쪽 자식이 없다면
-                    {
-                        current.left = newNode; // 왼쪽 자식으로 넣는다.
-                        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
-                        break;
-                    }
-                    else // 왼쪽 자식이 있다면
-                    {
-                        current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
-                        continue;
-                    }
-                }
-                else
-                {
-                    if (current.right == null) // 오른쪽 자식이 없다면
-                    {
-                        current.right = newNode; // 오른쪽 자식으로 넣는다.
-                        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
-                        break;
-                    }
-                    else // 오른쪽 자식이 있다면
-                    {
-                        current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
-                        continue;
-                    }
-                }
+                //if (newSpell.arias[0].CompareTo(currSpell.arias[0]) < 0)
+                //{
+                //    if (current.left == null) // 왼쪽 자식이 없다면
+                //    {
+                //        current.left = newNode; // 왼쪽 자식으로 넣는다.
+                //        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
+                //        break;
+                //    }
+                //    else // 왼쪽 자식이 있다면
+                //    {
+                //        current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
+                //        continue;
+                //    }
+                //}
+                //else
+                //{
+                //    if (current.right == null) // 오른쪽 자식이 없다면
+                //    {
+                //        current.right = newNode; // 오른쪽 자식으로 넣는다.
+                //        newNode.parent = current; // 새 노드의 부모를 현재 노드로 설정한다.
+                //        break;
+                //    }
+                //    else // 오른쪽 자식이 있다면
+                //    {
+                //        current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
+                //        continue;
+                //    }
+                //}
             }
         }
 
@@ -132,34 +134,34 @@ namespace TypingWizard
 
             while (true)
             {
-                if (aria.CompareTo(current.spell.arias[0]) < 0) // 현재 노드의 값보다 작다면
-                {
-                    if (current.left == null) // 왼쪽 자식이 없다면
-                    {
-                        return null; // null 반환
-                    }
-                    else
-                    {
-                        current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
-                        continue; // 다시 반복
-                    }
-                }
-                else if (aria.CompareTo(current.spell.arias[0]) > 0) // 현재 노드의 값보다 크다면
-                {
-                    if (current.right == null) // 오른쪽 자식이 없다면
-                    {
-                        return null; // null 반환
-                    }
-                    else
-                    {
-                        current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
-                        continue; // 다시 반복
-                    }
-                }
-                else
-                {
-                    return current.spellObj; // 일치하는 노드를 찾았다면 해당 노드 반환
-                }
+                //if (aria.CompareTo(current.spell.arias[0]) < 0) // 현재 노드의 값보다 작다면
+                //{
+                //    if (current.left == null) // 왼쪽 자식이 없다면
+                //    {
+                //        return null; // null 반환
+                //    }
+                //    else
+                //    {
+                //        current = current.left; // 현재 노드를 왼쪽 자식으로 설정하고
+                //        continue; // 다시 반복
+                //    }
+                //}
+                //else if (aria.CompareTo(current.spell.arias[0]) > 0) // 현재 노드의 값보다 크다면
+                //{
+                //    if (current.right == null) // 오른쪽 자식이 없다면
+                //    {
+                //        return null; // null 반환
+                //    }
+                //    else
+                //    {
+                //        current = current.right; // 현재 노드를 오른쪽 자식으로 설정하고
+                //        continue; // 다시 반복
+                //    }
+                //}
+                //else
+                //{
+                //    return current.spellObj; // 일치하는 노드를 찾았다면 해당 노드 반환
+                //}
             }
         }
     }

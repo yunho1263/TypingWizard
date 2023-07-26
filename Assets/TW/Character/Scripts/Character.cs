@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 namespace TypingWizard
 {
+    using Spells;
+    using Damages;
+
     public class Character : MonoBehaviour
     {
         public enum CharacterType

@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace TypingWizard
 {
+    using Spells;
     public class Player : Character
     {
         //½Ì±ÛÅæ ÆĞÅÏ Àû¿ë

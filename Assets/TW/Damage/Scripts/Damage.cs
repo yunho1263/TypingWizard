@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace TypingWizard
+namespace TypingWizard.Damages
 {
+    using Spells;
+
     [Serializable]
     public class Damage
     {

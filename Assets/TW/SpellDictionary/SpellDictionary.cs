@@ -4,12 +4,30 @@ using UnityEngine;
 
 namespace TypingWizard.SpellDictionary
 {
-    public abstract class SpellDictionary : MonoBehaviour
+    using Spells;
+    public class SpellDictionary : MonoBehaviour
     {
-        public abstract void Initialize();
-        public abstract bool Search(string input, out Spell spell);
-        public abstract void AddSpell(Spell spell);
-        public abstract void Optimize();
-        public abstract void Clear();
+        protected Hashtable spellTable;
+
+        public virtual void Initialize()
+        {
+            spellTable = new Hashtable();
+        }
+        public virtual bool Search(string input, out Spell spell)
+        {
+            spell = null;
+            return false;
+        }
+
+        public virtual bool Search(List<string> words, out Spell spell)
+        {
+            spell = null;
+            return false;
+        }
+
+        public virtual void AddSpell(Spell spell)
+        {
+
+        }
     }
 }

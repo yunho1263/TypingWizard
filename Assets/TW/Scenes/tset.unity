@@ -1223,11 +1223,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   playerInput: {fileID: 1095813181}
-  spell_BinaryTree:
-    allSpellObjs: []
-    root:
-      spellObj: {fileID: 0}
-      spell: {fileID: 0}
+  single_Spell_Prefabs: []
+  multiple_Spell_Prefabs: []
+  arcana_Spell_Prefabs: []
+  rogue_Spell_Prefabs: []
+  rune_Spell_Prefabs: []
+  learnedSpells: 01000000
   spellInputField: {fileID: 1844390046}
   interactiveObject: {fileID: 0}
   dialogueInputField: {fileID: 0}
@@ -2397,8 +2398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1844390046}
   inputedStr: 
-  curMultipleAriasSpell: {fileID: 0}
-  doneAriasSpellSentenceIndex: 0
 --- !u!114 &1844390046
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,9 +5,14 @@ using UnityEngine;
 namespace TypingWizard.SpellDictionary
 {
     using Spells;
-    public class SpellDictionary : MonoBehaviour
+    public class SpellDictionary
     {
         protected Hashtable spellTable;
+
+        public SpellDictionary()
+        {
+            Initialize();
+        }
 
         public virtual void Initialize()
         {

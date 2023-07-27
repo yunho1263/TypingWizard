@@ -16,8 +16,8 @@ MonoBehaviour:
   <GroupName>k__BackingField: 
   <Speaker>k__BackingField: testNpc
   <Ko_Text>k__BackingField: "\uC624\uB298 \uB0A0\uC528 \uC88B\uB2E4 \uADF8\uCE58?"
-  <Ja_Text>k__BackingField: asdads
-  <En_Text>k__BackingField: "\u4ECA\u65E5\u306E\u5929\u6C17\u3044\u3044\u3088\u306D\uFF1F"
+  <Ja_Text>k__BackingField: "\u4ECA\u65E5\u306E\u5929\u6C17\u3044\u3044\u3088\u306D\uFF1F"
+  <En_Text>k__BackingField: asdads
   <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - B1'
   <LocalizedText>k__BackingField:
     m_TableReference:
@@ -31,8 +31,8 @@ MonoBehaviour:
   <Branchs>k__BackingField:
   - <BranchName>k__BackingField: C1
     <Ko_Text>k__BackingField: "\uADF8\uB807\uB124"
-    <Ja_Text>k__BackingField: Yeah, that's great.
-    <En_Text>k__BackingField: "\u305D\u3046\u306A\u3093\u3067\u3059\u306D\u3001\u3044\u3044\u3067\u3059\u306D"
+    <Ja_Text>k__BackingField: "\u305D\u3046\u306A\u3093\u3067\u3059\u306D\u3001\u3044\u3044\u3067\u3059\u306D"
+    <En_Text>k__BackingField: Yeah, that's great.
     <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - B1 - C1'
     <LocalizedText>k__BackingField:
       m_TableReference:
@@ -46,8 +46,8 @@ MonoBehaviour:
     <NextDialogue>k__BackingField: {fileID: 11400000, guid: 030deb5fe2cec0b488d21c18b06c755f, type: 2}
   - <BranchName>k__BackingField: C2
     <Ko_Text>k__BackingField: "\uC544\uB2C8 \uBCC4\uB85C"
-    <Ja_Text>k__BackingField: Not really
-    <En_Text>k__BackingField: "\u3044\u3084\u3001\u3042\u307E\u308A"
+    <Ja_Text>k__BackingField: "\u3044\u3084\u3001\u3042\u307E\u308A"
+    <En_Text>k__BackingField: Not really
     <LocalizedTextKey>k__BackingField: 'st_B: NewDialogue - B1 - C2'
     <LocalizedText>k__BackingField:
       m_TableReference:

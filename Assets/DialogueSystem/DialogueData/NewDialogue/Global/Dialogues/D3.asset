@@ -16,8 +16,8 @@ MonoBehaviour:
   <GroupName>k__BackingField: 
   <Speaker>k__BackingField: testNpc
   <Ko_Text>k__BackingField: "\uD760 \uB098\uB9CC \uADF8\uB807\uAC8C \uB290\uB07C\uB294\uAC74\uAC00"
-  <Ja_Text>k__BackingField: Hmmm am I the only one who feels that way?
-  <En_Text>k__BackingField: "\u3046\u30FC\u3093\u3001\u305D\u3046\u611F\u3058\u308B\u306E\u306F\u79C1\u3060\u3051\uFF1F"
+  <Ja_Text>k__BackingField: "\u3046\u30FC\u3093\u3001\u305D\u3046\u611F\u3058\u308B\u306E\u306F\u79C1\u3060\u3051\uFF1F"
+  <En_Text>k__BackingField: Hmmm am I the only one who feels that way?
   <LocalizedTextKey>k__BackingField: 'st_D: NewDialogue - D3'
   <LocalizedText>k__BackingField:
     m_TableReference:

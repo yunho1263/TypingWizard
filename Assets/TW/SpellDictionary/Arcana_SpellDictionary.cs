@@ -10,6 +10,11 @@ namespace TypingWizard.SpellDictionary
         private string firstArcana;
         private string secondArcana;
 
+        public Arcana_SpellDictionary()
+        {
+            Initialize();
+        }
+
         public override void Initialize()
         {
             base.Initialize();
@@ -23,16 +28,49 @@ namespace TypingWizard.SpellDictionary
                 return false;
             }
 
-            // 여기 수정할것
-            firstArcana = words[0];
-            secondArcana = words[1];
-
-            Arcana_Spell Founded_Spell = spellTable[firstArcana + secondArcana] as Arcana_Spell;
-
-            if (Founded_Spell != null)
+            if (words.Count == 1)
             {
-                spell = Founded_Spell;
-                return true;
+                if (firstArcana == null)
+                {
+                    firstArcana = words[0];
+                }
+                else
+                {
+                    secondArcana = words[0];
+                }
+            }
+            else
+            {
+                if (firstArcana == null)
+                {
+                    firstArcana = words[0];
+                    secondArcana = words[1];
+                }
+                else
+                {
+                    firstArcana = null;
+                    secondArcana = null;
+                    spell = null;
+                    return false;
+                }
+            }
+
+            if (firstArcana != null && secondArcana != null)
+            {
+                Arcana_Spell founded_Spell = spellTable[firstArcana + secondArcana] as Arcana_Spell;
+
+                if (founded_Spell != null)
+                {
+                    firstArcana = null;
+                    secondArcana = null;
+                    spell = founded_Spell;
+                    return true;
+                }
+                else
+                {
+                    firstArcana = null;
+                    secondArcana = null;
+                }
             }
 
             spell = null;

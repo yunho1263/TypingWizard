@@ -8,7 +8,7 @@ namespace TypingWizard.Spells
     using Enums;
     using Damages;
 
-    public class TestSpell_1 : Spell
+    public class TestSpell_1 : SingleAria_Spell
     {
         public int maxProjectileCount;
 

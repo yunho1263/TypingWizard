@@ -11,6 +11,11 @@ namespace TypingWizard.SpellDictionary
         private MultipleAria_Spell currentcastingSpell;
         private int currentAriaIndex;
 
+        public Multiple_SpellDictionary()
+        {
+            Initialize();
+        }
+
         public override void Initialize()
         {
             base.Initialize();
@@ -18,9 +23,9 @@ namespace TypingWizard.SpellDictionary
 
         public override bool Search(string input, out Spell spell)
         {
+            spell = null;
             if (spellTable == null)
             {
-                spell = null;
                 return false;
             }
 
@@ -32,7 +37,8 @@ namespace TypingWizard.SpellDictionary
                     // 마지막 영창이라면 주문 시전 성공
                     if (currentcastingSpell.arias.Count == ++currentAriaIndex)
                     {
-                        spell = currentcastingSpell;
+                        spell = GameObject.Instantiate(currentcastingSpell).GetComponent<Spell>();
+                        spell.Initialize(Player.instance);
                         currentcastingSpell = null;
                         currentAriaIndex = 0;
                         return true;
@@ -53,7 +59,6 @@ namespace TypingWizard.SpellDictionary
                 currentAriaIndex = 1;
             }
 
-            spell = null;
             return false;
         }
 

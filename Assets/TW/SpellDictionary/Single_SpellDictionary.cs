@@ -8,6 +8,10 @@ namespace TypingWizard.SpellDictionary
 
     public class Single_SpellDictionary : SpellDictionary
     {
+        public Single_SpellDictionary()
+        {
+            Initialize();
+        }
 
         public override void Initialize()
         {
@@ -16,21 +20,21 @@ namespace TypingWizard.SpellDictionary
 
         public override bool Search(string input, out Spell spell)
         {
+            spell = null;
             if (spellTable == null)
             {
-                spell = null;
                 return false;
             }
 
-            SingleAria_Spell Founded_Spell = spellTable[input] as SingleAria_Spell;
+            SingleAria_Spell founded_Spell = spellTable[input] as SingleAria_Spell;
 
-            if (Founded_Spell != null)
+            if (founded_Spell != null)
             {
-                spell = Founded_Spell;
+                spell = GameObject.Instantiate(founded_Spell).GetComponent<Spell>();
+                spell.Initialize(Player.instance);
                 return true;
             }
 
-            spell = null;
             return false;
         }
 

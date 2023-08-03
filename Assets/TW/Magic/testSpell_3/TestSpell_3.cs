@@ -7,7 +7,7 @@ namespace TypingWizard.Spells
     using Enums;
     using Damages;
 
-    public class TestSpell_2 : MultipleAria_Spell
+    public class TestSpell_3 : Arcana_Spell
     {
         public float radius;
         public Damage damage;

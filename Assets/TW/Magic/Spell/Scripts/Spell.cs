@@ -38,7 +38,7 @@ namespace TypingWizard.Spells
 
         public virtual void Cast(Character caster)
         {
-            //Debug.Log(spellName + " " + caster.characterName);
+            Debug.Log(spellName + " " + caster.characterName);
         }
 
         public virtual void Initialize(Character caster)

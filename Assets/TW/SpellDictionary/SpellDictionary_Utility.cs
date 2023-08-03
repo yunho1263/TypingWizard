@@ -30,6 +30,7 @@ namespace TypingWizard.SpellDictionary.Utility
                     if (isSpace) // 이전 문자가 공백이었다면
                     {
                         isSpace = false;
+                        word += input[i];
                     }
                     else
                     {

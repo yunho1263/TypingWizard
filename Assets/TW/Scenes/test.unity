@@ -818,7 +818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 19.84, y: 32.1, z: -11.83}
+  m_LocalPosition: {x: 22.74, y: 12.66, z: 7.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1232,7 +1232,7 @@ MonoBehaviour:
   arcana_Spell_Prefabs: []
   rogue_Spell_Prefabs: []
   rune_Spell_Prefabs: []
-  learnedSpells: 01000000
+  learnedSpells: 010000000200000003000000
   spellInputField: {fileID: 1844390046}
   interactiveObject: {fileID: 0}
   dialogueInputField: {fileID: 0}
@@ -2174,6 +2174,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1515978016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1515978018}
+  - component: {fileID: 1515978017}
+  m_Layer: 0
+  m_Name: testSpell4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1515978017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515978016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a978edbd67b77d4d9cdd461339b3d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellID: 0
+  spellName: 
+  isAcquired: 0
+  spellTags: 
+  spell_Type: 3
+  cost: 0
+  description: 
+  caster: {fileID: 0}
+  targets: []
+  values: []
+  aria: 
+  modifiers:
+  - 
+  radius: 0
+  damage:
+    damageType: 0
+    damageCategori: 0
+    damageElement: 0
+    damageName: 
+    Description: 
+    owner: {fileID: 0}
+    target: {fileID: 0}
+    damageValue: 0
+    OnApplyDamage:
+      m_PersistentCalls:
+        m_Calls: []
+  d_ScrObj: {fileID: 0}
+--- !u!4 &1515978018
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515978016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.913902, y: -2.1031694, z: 21.937801}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1527448513
 GameObject:
   m_ObjectHideFlags: 0

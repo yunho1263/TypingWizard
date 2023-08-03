@@ -7,7 +7,7 @@ namespace TypingWizard.Spells
     using Enums;
     using Damages;
 
-    public class TestSpell_2 : MultipleAria_Spell
+    public class TestSpell_4 : Rogue_Spell
     {
         public float radius;
         public Damage damage;
@@ -33,6 +33,11 @@ namespace TypingWizard.Spells
                     character.TakeDamage(damage);
                 }
             }
+        }
+
+        public override bool Modify(string modifier)
+        {
+            return base.Modify(modifier);
         }
     }
 }

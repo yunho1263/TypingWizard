@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace TypingWizard.Spells.Enums
 {
+    #region basic
     public enum Spell_Type
     {
         Single_Aria,
@@ -42,4 +43,15 @@ namespace TypingWizard.Spells.Enums
         Range, //범위형
         Movement, //이동
     }
+    #endregion
+
+    #region Arcana
+    #endregion
+
+    #region Rogue_Spell
+    public enum Rogue_Elemental
+    {
+        None
+    }
+    #endregion
 }

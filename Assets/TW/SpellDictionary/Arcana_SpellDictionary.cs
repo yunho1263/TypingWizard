@@ -10,14 +10,9 @@ namespace TypingWizard.SpellDictionary
         private string firstArcana;
         private string secondArcana;
 
-        public Arcana_SpellDictionary()
+        public override void Awake()
         {
-            Initialize();
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
+            base.Awake();
         }
 
         public override bool Search(List<string> words, out Spell spell)

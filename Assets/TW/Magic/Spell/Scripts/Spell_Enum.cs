@@ -51,7 +51,15 @@ namespace TypingWizard.Spells.Enums
     #region Rogue_Spell
     public enum Rogue_Elemental
     {
-        None
+        None,
+        Fire,
+        Water,
+        Cold,
+        Thunder,
+        Earth,
+        Wind,
+        Light,
+        Dark,
     }
     #endregion
 }

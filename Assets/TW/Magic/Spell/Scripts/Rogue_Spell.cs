@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TypingWizard.SpellDictionary;
 using UnityEngine;
 
 namespace TypingWizard.Spells
@@ -9,16 +10,14 @@ namespace TypingWizard.Spells
         public string aria;
         public List<string> modifiers;
 
-        public virtual bool Modify(string modifier)
+        public virtual bool CanModify(List<string> modifiers, Rogue_SpellDictionary rogue_SpellDictionary)
         {
-            if (modifiers.Contains(modifier))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return true;
+        }
+
+        public virtual void Modify(List<string> modifiers, Rogue_SpellDictionary rogue_SpellDictionary)
+        {
+
         }
     }
 }

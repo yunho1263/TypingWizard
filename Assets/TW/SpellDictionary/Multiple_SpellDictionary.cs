@@ -11,14 +11,9 @@ namespace TypingWizard.SpellDictionary
         private MultipleAria_Spell currentcastingSpell;
         private int currentAriaIndex;
 
-        public Multiple_SpellDictionary()
+        public override void Awake()
         {
-            Initialize();
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
+            base.Awake();
         }
 
         public override bool Search(string input, out Spell spell)

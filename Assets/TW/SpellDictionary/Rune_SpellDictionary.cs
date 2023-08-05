@@ -11,14 +11,9 @@ namespace TypingWizard.SpellDictionary
         private Rune_Spell currentBasicRune;
         private Rune_Spell lastRune;
 
-        public Rune_SpellDictionary()
+        public override void Awake()
         {
-            Initialize();
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
+            base.Awake();
         }
 
         public override bool Search(string input, out Spell spell)

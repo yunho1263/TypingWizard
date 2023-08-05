@@ -11,10 +11,6 @@ namespace TypingWizard.Spells.Utility
         #endregion
 
         #region Rogue_Spell
-        public static Rogue_Elemental GetElementalModify(string modifier)
-        {
-            return Rogue_Elemental.None;
-        }
         #endregion
     }
 }

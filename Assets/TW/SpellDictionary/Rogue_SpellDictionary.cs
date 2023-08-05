@@ -1,20 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TypingWizard.Spells;
+using TypingWizard.Spells.Utility;
+using UnityEditor.Localization;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
 
 namespace TypingWizard.SpellDictionary
 {
+    using Spells.Enums;
     public class Rogue_SpellDictionary : SpellDictionary
     {
-        public Rogue_SpellDictionary()
-        {
-            Initialize();
-        }
+        public RogueSpell_Arguments<Rogue_Elemental> elementalType;
 
-        public override void Initialize()
+        public override void Awake()
         {
-            base.Initialize();
+            base.Awake();
+            StringTableCollection stringTableCol_REET = LocalizationEditorSettings.GetStringTableCollection("RogueSpell_ElementTypes");
+            elementalType = new RogueSpell_Arguments<Rogue_Elemental>(stringTableCol_REET);
         }
 
         public override bool Search(List<string> words, out Spell spell)
@@ -31,15 +36,14 @@ namespace TypingWizard.SpellDictionary
             {
                 List<string> modifiers = words.GetRange(1, words.Count - 1);
 
-                foreach (string modifier in modifiers)
+                if(!founded_Spell.CanModify(modifiers, this))
                 {
-                    if (!founded_Spell.Modify(modifier))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
-                
-                spell = founded_Spell;
+                spell = Instantiate(founded_Spell.gameObject).GetComponent<Spell>();
+                spell.Initialize(Player.instance);
+                Rogue_Spell r_spell = spell as Rogue_Spell;
+                r_spell.Modify(modifiers, this);
                 return true;
             }
             else

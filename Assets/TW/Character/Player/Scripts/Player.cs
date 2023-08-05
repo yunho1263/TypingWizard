@@ -12,6 +12,7 @@ namespace TypingWizard
     using SpellDictionary;
     using SpellDictionary.Utility;
     using Dialogue;
+    using UnityEditor.Localization;
 
     public class Player : Character
     {
@@ -29,13 +30,6 @@ namespace TypingWizard
             }
 
             DontDestroyOnLoad(this.gameObject);
-
-            // 플레이어의 스펠 사전을 초기화한다
-            single_SpellDictionary = new Single_SpellDictionary();
-            multiple_SpellDictionary = new Multiple_SpellDictionary();
-            arcana_SpellDictionary = new Arcana_SpellDictionary();
-            rogue_SpellDictionary = new Rogue_SpellDictionary();
-            rune_SpellDictionary = new Rune_SpellDictionary();
 
             LoadAllLearnedSpells();
         }

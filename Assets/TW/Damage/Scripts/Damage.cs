@@ -29,10 +29,12 @@ namespace TypingWizard.Damages
             None,
             Fire,
             Water,
+            Cold,
+            Thunder,
             Earth,
             Wind,
             Light,
-            Dark
+            Dark,
         }
         public DamageElement damageElement;
 

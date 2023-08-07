@@ -41,7 +41,7 @@ namespace TypingWizard.Spells
                 if (!projectiles[i].isUsing)
                 {
                     projectiles[i].gameObject.SetActive(true);
-                    SpellValueDictionaryEntry Entry = values.FirstOrDefault(item => item.key.Equals(ValueType.Damage));
+                    float vel = values[ValueType.Damage];
                     projectiles[i].Shoot(this, damage, 5f, 10f, Vector3.forward);
                     break;
                 }

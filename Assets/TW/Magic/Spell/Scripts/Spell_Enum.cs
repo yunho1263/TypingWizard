@@ -27,10 +27,10 @@ namespace TypingWizard.Spells.Enums
         Damage,
         Heal,
         duration,
-        range,
-        speed,
-        size,
-        count
+        Range,
+        Speed,
+        Size,
+        Count
     }
 
     public enum Spell_Tag

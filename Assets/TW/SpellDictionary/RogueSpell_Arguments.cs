@@ -18,6 +18,7 @@ namespace TypingWizard.Spells.Utility
             keys = new List<LocalizedString>();
             values = new List<T>();
 
+            // 테이블에 있는 모든 열거형 값을 대응하는 키값으로 설정
             foreach (T value in System.Enum.GetValues(typeof(T)))
             {
                 LocalizedString newLocString = new LocalizedString();

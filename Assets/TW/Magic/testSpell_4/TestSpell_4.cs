@@ -21,6 +21,7 @@ namespace TypingWizard.Spells
         {
             base.Initialize(caster);
             damage = new Damage(d_ScrObj);
+            radius = values[ValueType.Range];
         }
 
         public override void Cast(Character caster)
@@ -37,6 +38,8 @@ namespace TypingWizard.Spells
                     character.TakeDamage(damage);
                 }
             }
+
+            DestroySelf(0.1f);
         }
 
         public override bool CanModify(List<string> modifiers, Rogue_SpellDictionary rogue_SpellDictionary)

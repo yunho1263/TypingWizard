@@ -7,12 +7,6 @@ using UnityEngine.InputSystem;
 namespace TypingWizard.Spells
 {
     using Enums;
-    [Serializable]
-    public class SpellValueDictionaryEntry
-    {
-        public ValueType key;
-        public float value;
-    }
 
     [Serializable]
     public class Spell : MonoBehaviour
@@ -33,8 +27,7 @@ namespace TypingWizard.Spells
         public Character caster; // 시전자
         public List<GameObject> targets; // 대상
 
-        [SerializeField]
-        public List<SpellValueDictionaryEntry> values; //주문 값
+        public SerializableDictionary<ValueType, float> values; //주문 값
 
         public virtual void Cast(Character caster)
         {
@@ -45,6 +38,12 @@ namespace TypingWizard.Spells
         {
             this.caster = caster;
         }
-    }
 
+        // 일정 시간 후 자신의 오브젝트를 파괴하는 코루틴
+        public IEnumerator DestroySelf(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            Destroy(gameObject);
+        }
+    }
 }

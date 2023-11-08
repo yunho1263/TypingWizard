@@ -62,4 +62,14 @@ namespace TypingWizard.Spells.Enums
         Dark,
     }
     #endregion
+
+    #region Rune_Spell
+    public enum Rune_ModifiyType
+    {
+        Rune_Spell,
+        Damage,
+        Projectile,
+        Event
+    }
+    #endregion
 }

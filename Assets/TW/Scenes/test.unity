@@ -918,6 +918,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mode: 1
   PixelSize: 0.032
+--- !u!1 &661916306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 661916308}
+  - component: {fileID: 661916307}
+  m_Layer: 0
+  m_Name: TestRune2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &661916307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661916306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f478876ac53984091395892db0a6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellID: 6
+  spellName: 
+  isAcquired: 1
+  spellTags: 
+  spell_Type: 0
+  cost: 0
+  description: 
+  caster: {fileID: 0}
+  targets: []
+  values:
+    list: []
+  aria: 
+  previousRune: {fileID: 0}
+  nextRune: {fileID: 0}
+  modifiys: []
+  modifiyableObjects: []
+  modifiyTypes: 
+  damage:
+    damageType: 0
+    damageCategori: 0
+    damageElement: 0
+    damageName: 
+    Description: 
+    owner: {fileID: 0}
+    target: {fileID: 0}
+    damageValue: 0
+    OnApplyDamage:
+      m_PersistentCalls:
+        m_Calls: []
+  d_ScrObj: {fileID: 0}
+--- !u!4 &661916308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661916306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.913902, y: -2.1031694, z: 21.937801}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &787461084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,7 +1386,7 @@ MonoBehaviour:
   arcana_Spell_Prefabs: []
   rogue_Spell_Prefabs: []
   rune_Spell_Prefabs: []
-  learnedSpells: 01000000020000000300000004000000
+  learnedSpells: 0100000002000000030000000400000005000000
   single_SpellDictionary: {fileID: 1001577183}
   multiple_SpellDictionary: {fileID: 1312840757}
   arcana_SpellDictionary: {fileID: 1174207503}

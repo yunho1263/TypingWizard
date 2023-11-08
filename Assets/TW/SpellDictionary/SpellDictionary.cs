@@ -11,7 +11,7 @@ namespace TypingWizard.SpellDictionary
     {
         protected Hashtable spellTable;
 
-        public virtual void Awake()
+        public virtual void Initialize()
         {
             spellTable = new Hashtable();
         }

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 namespace TypingWizard.Damages
 {
     using Spells;
+    using TypingWizard.Spells.Enums;
 
     [Serializable]
     public class Damage
@@ -35,6 +36,18 @@ namespace TypingWizard.Damages
             Wind,
             Light,
             Dark,
+
+
+            Rogue_Elemental_None = Rogue_Elemental.None,
+            Rogue_Elemental_Fire = Rogue_Elemental.Fire,
+            Rogue_Elemental_Water = Rogue_Elemental.Water,
+            Rogue_Elemental_Cold = Rogue_Elemental.Cold,
+            Rogue_Elemental_Thunder = Rogue_Elemental.Thunder,
+            Rogue_Elemental_Earth = Rogue_Elemental.Earth,
+            Rogue_Elemental_Wind = Rogue_Elemental.Wind,
+            Rogue_Elemental_Light = Rogue_Elemental.Light,
+            Rogue_Elemental_Dark = Rogue_Elemental.Dark
+
         }
         public DamageElement damageElement;
 

@@ -51,7 +51,8 @@ namespace TypingWizard.Spells
         {
             Rogue_Elemental elementalType;
             rogue_SpellDictionary.elementalType.GetValue(modifiers[0], out elementalType);
-
+            damage.damageElement = (DamageElement)elementalType;
+            /*
             switch (elementalType)
             {
                 case Rogue_Elemental.None:
@@ -82,6 +83,7 @@ namespace TypingWizard.Spells
                     damage.damageElement = DamageElement.Dark;
                     break;
             }
+            */
         }
     }
 }

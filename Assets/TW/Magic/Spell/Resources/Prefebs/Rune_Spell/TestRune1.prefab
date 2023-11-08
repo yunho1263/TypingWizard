@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5937620392702698429
+--- !u!1 &8499495047909244816
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1044508753147667911}
-  - component: {fileID: 4891333920750329860}
+  - component: {fileID: 7367101206145121130}
+  - component: {fileID: 6446781345064033738}
   m_Layer: 0
-  m_Name: testSpell4
+  m_Name: TestRune1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1044508753147667911
+--- !u!4 &7367101206145121130
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937620392702698429}
+  m_GameObject: {fileID: 8499495047909244816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 21.913902, y: -2.1031694, z: 21.937801}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,37 +32,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4891333920750329860
+--- !u!114 &6446781345064033738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937620392702698429}
+  m_GameObject: {fileID: 8499495047909244816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a978edbd67b77d4d9cdd461339b3d00, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a0f7c826ddda58488249e5c7b8ceff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellID: 4
+  spellID: 5
   spellName: 
-  isAcquired: 0
+  isAcquired: 1
   spellTags: 
-  spell_Type: 3
+  spell_Type: 4
   cost: 0
   description: 
   caster: {fileID: 0}
   targets: []
   values:
-    list:
-    - Key: 0
-      Value: 0
-    - Key: 3
-      Value: 5
-  aria: rog
-  modifiers:
-  - 
-  radius: 0
+    list: []
+  runeSpell_Type: 0
+  aria: ria
+  previousRune: {fileID: 0}
+  nextRune: {fileID: 0}
+  modifiys: []
+  modifiyableObjects: []
+  projectiles:
+  - {fileID: 0}
+  projectilePrefab: {fileID: 4429862581699613265, guid: f466cd4038400cf42bd0f89489e5fc79, type: 3}
   damage:
     damageType: 0
     damageCategori: 0

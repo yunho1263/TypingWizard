@@ -9,9 +9,9 @@ namespace TypingWizard.SpellDictionary
     public class Single_SpellDictionary : SpellDictionary
     {
 
-        public override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
         }
 
         public override bool Search(string input, out Spell spell)

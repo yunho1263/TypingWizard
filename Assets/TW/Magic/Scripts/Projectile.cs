@@ -6,6 +6,8 @@ using UnityEngine;
 namespace TypingWizard.Spells
 {
     using Damages;
+    using UnityEngine.Events;
+
     public class Projectile : MonoBehaviour
     {
         public Vector3 normalDir;
@@ -17,6 +19,8 @@ namespace TypingWizard.Spells
         public bool isUsing;
 
         public Character owner;
+
+        public UnityEvent OnHit;
 
         private void Start()
         {
@@ -41,6 +45,7 @@ namespace TypingWizard.Spells
             {
                 Debug.Log("Hit Enemy");
             }
+            OnHit.Invoke();
             //Instantiate(impactEffect, transform.position, transform.rotation);
         }
 
@@ -60,5 +65,4 @@ namespace TypingWizard.Spells
             normalDir = nDir;
         }
     }
-
 }

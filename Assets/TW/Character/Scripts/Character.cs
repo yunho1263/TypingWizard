@@ -51,7 +51,10 @@ namespace TypingWizard
 
             currentHp -= damageValue; // 현재 체력에서 데미지만큼 감소
 
-            damage.OnApplyDamage.Invoke(this); // 데미지 객체가 데미지를 주었을 떄 이벤트 발생
+            if (damage.OnApplyDamage != null)
+            {
+                damage.OnApplyDamage.Invoke(this); // 데미지 객체가 데미지를 주었을 때 이벤트 발생
+            }
             onDamage.Invoke(damage, damageValue); // 데미지를 받았을 때 이벤트 발생
 
             if (currentHp <= 0) // 체력이 0 이하일 때

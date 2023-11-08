@@ -15,9 +15,9 @@ namespace TypingWizard.SpellDictionary
     {
         public RogueSpell_Arguments<Rogue_Elemental> elementalType;
 
-        public override void Awake()
+        public override void Initialize()
         {
-            base.Awake();
+            base.Initialize();
             // 주문을 수식하는 인자들을 정의한다
             StringTableCollection stringTableCol_REET = LocalizationEditorSettings.GetStringTableCollection("RogueSpell_ElementTypes");
             elementalType = new RogueSpell_Arguments<Rogue_Elemental>(stringTableCol_REET);
